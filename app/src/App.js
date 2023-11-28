@@ -3,31 +3,13 @@ import {useState } from 'react';
 import axios from "axios";
 import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
-import CircularProgress from '@mui/material/CircularProgress';
-
+import CircularProgress from './progress'
 import Scatterplot  from './plotdata'
-import data from './datasets/data.json'
-import data_labels from './datasets/data_labels.json'
 
-import data_colors from './datasets/data_colors.json'
-import data_colors_labels from './datasets/data_colors_labels.json'
 
-import data_places from './datasets/data_places.json'
-import data_places_labels from './datasets/data_places_labels.json'
+import data from './datasets/data2_.json'
+import data_labels from './datasets/data2__labels.json'
 
-import data_lit from './datasets/data_lit.json'
-import data_lit_labels from './datasets/data_lit_labels.json'
-/*import frankenstein from './datasets/frankenstein.json'
-import frankenstein_labels from './datasets/frankenstein_labels.json'
-
-import frankenstein_time from './datasets/frankenstein_time.json'
-import frankenstein_time_labels from './datasets/frankenstein_time_labels.json'
-
-import frankenstein_emotions from './datasets/frankenstein_emotions.json'
-import frankenstein_emotions_labels from './datasets/frankenstein_emotions_labels.json'
-
-import frankenstein_characters from './datasets/frankenstein_characters.json'
-import frankenstein_characters_labels from './datasets/frankenstein_characters_labels.json'*/
 
 
 
@@ -37,23 +19,39 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 //let data_all ={"baseline":data,"time":frankenstein_time, "emotions":frankenstein_emotions, "characters":frankenstein_characters }
 //let labels_all ={"baseline":data_labels,"time":frankenstein_time_labels, "emotions":frankenstein_emotions_labels, "characters":frankenstein_characters_labels}
-let data_all ={"baseline":data, "colors":data_colors, "places":data_places, "lit":data_lit}
-let labels_all ={"baseline":data_labels, "colors":data_colors_labels,  "places":data_places_labels, "lit":data_lit_labels}
 function App() {
 
-    
-  
   const [plottedData, setPlottedData] = useState(data);
+  const [dataset, setDataset] = useState('data2');
   const [labelData, setLabelData] = useState(data_labels);
   const [loading, setLoading] = useState(false);
+  const [colorCol, setColorCol] = useState(-1);
 
-  const [theme, setTheme] = useState('colors');
+  var [theme, setTheme] = useState('');
+  const [preset, setPreset] = useState(['','colors','places','emotions', 'literary_styles']);
 
+ //
 
-  const handleSend = () => {
-    setPlottedData(data_all[theme])
-    setLabelData(labels_all[theme])
+  const loadData = (dataset) => {
 
+    try {
+      var data_labels2= require('./datasets/'+dataset+'_'+theme+'_labels.json')
+      var data2= require('./datasets/'+dataset+'_'+theme+'.json');
+  
+  
+      setPlottedData(data2)
+      setLabelData(data_labels2)
+      setLoading(false)
+  
+     }
+     catch (e) {
+      console.log(e)
+      setLoading(false)
+      /*alert('Oops: Not Allowed')
+      setDataset('small')
+      setDR('umap')
+      setClusterBy('content')*/
+     }
   }
 
   const handleFileChange = (event) => {
@@ -74,40 +72,65 @@ function App() {
 
   const handleDownload = () => {
       if (plottedData) {
-          const blob = new Blob([JSON.stringify(plottedData, null, 2)], { type: 'application/json' });
-          const link = document.createElement('a');
+          var blob = new Blob([JSON.stringify(plottedData, null, 2)], { type: 'application/json' });
+          var link = document.createElement('a');
           link.href = URL.createObjectURL(blob);
-          link.download = 'projections_'+theme+'.json';
+          link.download = dataset+'_'+theme+'.json';
           document.body.appendChild(link);
           link.click();
           document.body.removeChild(link);
+
+          blob = new Blob([JSON.stringify(labelData, null, 2)], { type: 'application/json' });
+          link.href = URL.createObjectURL(blob);
+          link.download = dataset+'_'+theme+'_labels.json';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
+
       } else {
           alert('No JSON data to download');
       }
   };
 
-
-  /*const handleSend = () => {
+  const handleSend = () => {
     setLoading(true)
     let req = {
-        data: selectedOption,
+        dataset: dataset,
         theme: theme,
       };
+    if (!preset.includes(theme)){
+      axios
+      .post(localDevURL + "modify-embeddings", req)
+      .then((response) => {
+        console.log(response.data.embeddings)
+        setPlottedData(response.data.embeddings)
+        setLabelData(response.data.labels )
+        setLoading(false)
+      })
+      .catch((error) => {
+        alert("Error in the backend");
+        setLoading(false)
+      });
+    }else{
+
+      loadData(dataset)
+      
+      
+    }
     
-    axios
-    .post(localDevURL + "modify-embeddings", req)
-    .then((response) => {
-      console.log(response.data.data)
-      setPlottedData(frankenstein_emotions)
-      setLabelData(frankenstein_emotions_labels)
-      setLoading(false)
-    })
-    .catch((error) => {
-      console.log(error);
-      setLoading(false)
-    });
+
+  };
+
+  /*
+    const handleSend = () => {
+    setPlottedData(data_all[theme])
+    setLabelData(labels_all[theme])
+
+  }
+  
     
-  };*/
+ */
 
 
 
@@ -125,34 +148,54 @@ function App() {
         <h2>Embedding Projection Modifier</h2>
 
        Dataset: <select 
-        value={'Frankenstein'} 
-        onChange={null}
+        value={dataset} 
+        onChange={e => {setDataset(e.target.value);theme='';setTheme('');console.log(e.target.value);loadData(e.target.value)}}
         style={{ width: '40%', padding: '5px', borderRadius: '5px' }}>
-        <option value="frankstein">Frankenstein</option>
+        <option value="data">Synth25</option>
+        <option value="data2">Synth200</option>
+
       </select>
 
       <button  style={{ margin:"15px", padding: '5px'}}onClick={handleDownload}>Save View</button>
-      Cluster by: &nbsp;<input 
-            style={{display:'none'}}
-            type="text"
-            value={theme}
-            onChange={e => {setTheme(e.target.value)}}
-         /> 
-         <select 
-        value={theme} 
-        onChange={e => {setTheme(e.target.value)}}
-        style={{ width: '40%', padding: '5px', borderRadius: '5px' }}>
-        <option value="colors">Colors</option>
-        <option value="places">Places</option>
-        <option value="lit">Lit Style</option>
+  
+       <label for="theme-choice">Group by: </label>
+        <input list="theme-options" id="theme-choice" name="theme-choice" type="search"
+        value={theme}
+                    onChange={e => {setTheme(e.target.value)}}
+                    />
 
-      </select>
+        <datalist id="theme-options">
+          <option value="colors"></option>
+          <option value="places"></option>
+          <option value="emotions"></option>
+          <option value="literary_styles"></option>
+        </datalist>
+         
          <IconButton aria-label="send">
 
             {(loading)?<CircularProgress size="1.5rem"  color="inherit"style={{}}/>:<SendIcon onClick={handleSend}/>}
          
        </IconButton>
+            <br/>
+       Color by: &nbsp;
+         <select 
+        value={colorCol} 
+        onChange={e => {setColorCol(e.target.value)}}
+        style={{ width: '40%', padding: '5px', borderRadius: '5px' }}>
+        <option value="-1">DBSCAN Clusters</option>
 
+        <option value="4">Colors</option>
+        <option value="5">Animals</option>
+
+        <option value="6">Places</option>
+
+        <option value="7">Time</option>
+        <option value="8">Emotion</option>
+        <option value="9">Lit Style</option>
+
+      </select>
+      <br/>
+      <br/>
 
         <p style={{ paddingLeft: "15px",paddingRight: "15px", display:'none'}} align="left" >Each point is an embedded text. Visual clusters are identified by a clustering algorithm. <br /><br />
       This clustering may not be optimal for your task. You can change this!<br /><br />
@@ -169,7 +212,7 @@ function App() {
         </div>
 
         <div>
-            <Scatterplot data={plottedData} labels ={labelData} width={1000} height={800} />
+            <Scatterplot data={plottedData} labels ={labelData} colorCol ={colorCol} width={1000} height={800} />
         </div>
     </div>
   );

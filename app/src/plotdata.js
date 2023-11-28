@@ -13,17 +13,38 @@ const colors2 = [
 ]
 
 const colors = [
-    "#17becf", "#bcbd22", "#7f7f7f", "#e377c2", "#8c564b", 
-    "#9467bd", "#d62728", "#2ca02c", "#ff7f0e", "#1f77b4"
+    "#d62728", "#bcbd22","#0000","#17becf", "#FFD700","#9467bd",
+     "#808080","#1f77b4", "#2ca02c", "#ff7f0e", "#7f7f7f","#e377c2"
 ]
+
+const getColumn = (arr, n) => arr.map(x => x[n]);
+
+function encodeArray(array) {
+    // Step 1: Identify unique strings
+    const uniqueStrings = new Set(array);
+
+    console.log(uniqueStrings )
+
+    // Step 2: Map strings to numbers
+    const stringToNumberMap = {};
+    let number = 0;
+    uniqueStrings.forEach(str => {
+        stringToNumberMap[str] = number++;
+    });
+
+    // Step 3: Generate encoded array
+    return array.map(str => stringToNumberMap[str]);
+}
+
 
 
 function Scatterplot(props) {
-  const { width, height, data , labels} = props;
+  const { width, height, data , labels, colorCol} = props;
   const margin = {top:100, left:120, right:80, bottom:100}
   const ref = useRef();
   const [labelData, setLabelData] = useState([])
 
+  console.log(colorCol)
 
   useEffect(() => {
     const svg = d3.select(ref.current);
@@ -55,7 +76,7 @@ function Scatterplot(props) {
 
 
     // Bind data to circles and add tooltips
-    console.log(labels)
+    //console.log(labels)
     // Compute the density contours.
     const contours = d3.contourDensity()
     .x(d => xScale(d[0]))
@@ -67,7 +88,7 @@ function Scatterplot(props) {
 
 
 
-    console.log(contours)
+    //console.log(contours)
     
 
     // Append the contours.
@@ -82,6 +103,14 @@ function Scatterplot(props) {
         .attr("d", d3.geoPath());
 
 
+    //SetcolorCol
+    if (colorCol!=-1){
+        var color_idx = encodeArray(getColumn(data,colorCol));
+
+        console.log(data,color_idx); // Output: [0, 0, 1, 0]
+    }else{
+        var color_idx = encodeArray(getColumn(data,3))
+    }
         
     svg.selectAll('circle')
         .data(data)
@@ -90,8 +119,8 @@ function Scatterplot(props) {
         .attr('cx', d => xScale(d[0]))
         .attr('cy', d => yScale(d[1]))
         .attr('r', 4)
-        .style("opacity", d =>  d[3]===-1? 0.2 : 0.9)
-        .attr('fill', d =>  d[3]===-1?'grey':colors[d[3]%10])
+        .style("opacity", 0.9)
+        .attr('fill', (d,i) =>  colors[color_idx[i]%10])
         .attr('stroke', 'black')  // Add this line for the boundary color
         .attr('stroke-width', 0.5)  // Add this line for the boundary width
         .on("mouseover", (event, d) => {
@@ -127,6 +156,7 @@ function Scatterplot(props) {
         .attr('font-weight', '800') ;
 
 
+
    
         
         setLabelData( [
@@ -138,16 +168,14 @@ function Scatterplot(props) {
 
       
 
-  }, [data, labels, width, height]);
+  }, [data, labels, width, height, colorCol]);
 
   return (
     <>
             
         <svg ref={ref} width={width} height={height}></svg>
-        <div id = 'legend' style={{position:'absolute', top:'80%', left:"1%",width:30}}>
-        <PieChart data={labelData[0]}/>
-        <PieChart data={labelData[1]}/>
-        <PieChart data={labelData[2]}/>
+        <div id = 'legend' style={{position:'absolute', top:'80%', left:"1%",width:30, display:'none'}}>
+
             
             </div>;
     </>

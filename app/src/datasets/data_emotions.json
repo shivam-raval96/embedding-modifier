@@ -1,9 +1,9 @@
 [
   [
-    7.7781772614,
-    8.5804567337,
+    6.4631175995,
+    4.6383829117,
     "The blue cat on the beach was as calm as the ocean's whisper.",
-    0,
+    2,
     "blue",
     "cat",
     "beach",
@@ -12,8 +12,8 @@
     "simile"
   ],
   [
-    10.3078994751,
-    7.7082219124,
+    6.0926122665,
+    7.6474585533,
     "In the city so grand, a red bird landed on my hand.",
     1,
     "red",
@@ -24,10 +24,10 @@
     null
   ],
   [
-    10.194355011,
-    5.6788158417,
+    6.4387669563,
+    12.0803146362,
     "A green elephant in the forest stomped so hard, it could shake the stars.",
-    1,
+    0,
     "green",
     "elephant",
     "forest",
@@ -36,10 +36,10 @@
     "hyperbole"
   ],
   [
-    10.6378383636,
-    8.2997655869,
+    5.6615700722,
+    4.0042014122,
     "A red cat in the city, sleek as a flame dancing in the night.",
-    1,
+    2,
     "red",
     "cat",
     "city",
@@ -48,8 +48,8 @@
     "simile"
   ],
   [
-    8.0916929245,
-    9.1859407425,
+    6.4638671875,
+    11.5561676025,
     "On the beach so wide, a blue bird soared high in the sky with pride.",
     0,
     "blue",
@@ -60,10 +60,10 @@
     null
   ],
   [
-    10.4019861221,
-    5.2718548775,
+    6.5312013626,
+    4.9894633293,
     "The green cat in the forest leaped with a bound that could leap over mountains.",
-    1,
+    2,
     "green",
     "cat",
     "forest",
@@ -72,10 +72,10 @@
     "hyperbole"
   ],
   [
-    7.5996603966,
-    9.29429245,
+    7.1111445427,
+    7.3671975136,
     "Like a hidden emerald, the green bird in the forest sang melodiously.",
-    0,
+    1,
     "green",
     "bird",
     "forest",
@@ -84,10 +84,10 @@
     "simile"
   ],
   [
-    10.253487587,
-    8.2163505554,
+    5.7308688164,
+    12.5095453262,
     "In the city bright, a red elephant paraded with delight.",
-    1,
+    0,
     "red",
     "elephant",
     "city",
@@ -96,10 +96,10 @@
     null
   ],
   [
-    10.8583164215,
-    4.7526431084,
+    6.1410794258,
+    11.7343072891,
     "A blue elephant at the beach, so massive it seemed like a mountain beside the sea.",
-    1,
+    0,
     "blue",
     "elephant",
     "beach",
@@ -108,10 +108,10 @@
     "simile"
   ],
   [
-    9.0122451782,
-    9.0049180984,
+    6.5271606445,
+    7.917403698,
     "The red bird at the beach flew like a dart through the heart of the sky.",
-    0,
+    1,
     "red",
     "bird",
     "beach",
@@ -120,10 +120,10 @@
     "simile"
   ],
   [
-    9.8597707748,
-    5.2531228065,
+    6.3477549553,
+    4.0207734108,
     "In the forest so deep, a green cat slept without a peep.",
-    1,
+    2,
     "green",
     "cat",
     "forest",
@@ -132,10 +132,10 @@
     "rhyme"
   ],
   [
-    10.4531116486,
-    5.9046006203,
+    6.1014270782,
+    4.3294744492,
     "A blue cat in the city, with eyes that outshone the neon lights.",
-    1,
+    2,
     "blue",
     "cat",
     "city",
@@ -144,10 +144,10 @@
     "hyperbole"
   ],
   [
-    10.7181549072,
-    4.9120965004,
+    5.2770500183,
+    11.9917449951,
     "The green elephant in the city was as grand as the tallest skyscraper.",
-    1,
+    0,
     "green",
     "elephant",
     "city",
@@ -156,10 +156,10 @@
     "simile"
   ],
   [
-    8.6201944351,
-    9.3222579956,
+    6.3626461029,
+    7.2729845047,
     "On the beach so serene, a red bird sang a tune unseen.",
-    0,
+    1,
     "red",
     "bird",
     "beach",
@@ -168,10 +168,10 @@
     "rhyme"
   ],
   [
-    7.6333322525,
-    9.8193502426,
+    6.8478369713,
+    7.5092921257,
     "In the forest, a blue bird's song could be heard echoing for miles around.",
-    0,
+    1,
     "blue",
     "bird",
     "forest",
@@ -180,10 +180,10 @@
     null
   ],
   [
-    10.6308240891,
-    6.9215278625,
+    6.5493550301,
+    5.4651641846,
     "Like a floating cloud, the white cat on the beach was soft and proud.",
-    1,
+    2,
     "white",
     "cat",
     "beach",
@@ -192,10 +192,10 @@
     "simile"
   ],
   [
-    11.1250238419,
-    5.0712532997,
+    5.7098922729,
+    12.0944395065,
     "In the city's hustle, a green elephant's trumpet caused a bustle.",
-    1,
+    0,
     "green",
     "elephant",
     "city",
@@ -204,10 +204,10 @@
     "rhyme"
   ],
   [
-    8.535733223,
-    8.8219919205,
+    6.7821674347,
+    4.4057331085,
     "A red cat in the forest, whose purr could lull the fiercest beasts to sleep.",
-    0,
+    2,
     "red",
     "cat",
     "forest",
@@ -216,10 +216,10 @@
     "hyperbole"
   ],
   [
-    7.9478969574,
-    9.7936353683,
+    6.8557171822,
+    7.2213363647,
     "The blue bird in the forest was like a splash of the sky among the trees.",
-    0,
+    1,
     "blue",
     "bird",
     "forest",
@@ -228,8 +228,8 @@
     "simile"
   ],
   [
-    10.9157047272,
-    7.2076635361,
+    7.0212216377,
+    7.9129281044,
     "By the city's glow, a green bird did gracefully flow.",
     1,
     "green",
@@ -240,10 +240,10 @@
     "rhyme"
   ],
   [
-    10.608716011,
-    7.9004840851,
+    5.3604521751,
+    12.4756126404,
     "In the beach's embrace, a red elephant moved with grace that could outpace the waves.",
-    1,
+    0,
     "red",
     "elephant",
     "beach",
@@ -252,10 +252,10 @@
     null
   ],
   [
-    10.8494348526,
-    5.3318724632,
+    5.9372606277,
+    4.1795425415,
     "A green cat in the city, sly as a shadow under the moonlit alley.",
-    1,
+    2,
     "green",
     "cat",
     "city",
@@ -264,10 +264,10 @@
     "simile"
   ],
   [
-    10.5685634613,
-    7.3205928802,
+    5.9505677223,
+    12.0159626007,
     "On the beach, so fine, a blue elephant walked in a line so divine.",
-    1,
+    0,
     "blue",
     "elephant",
     "beach",
@@ -276,10 +276,10 @@
     "rhyme"
   ],
   [
-    8.1442861557,
-    8.6466426849,
+    7.4305329323,
+    7.3559269905,
     "The red bird in the city sang with a voice that could outshine the sun.",
-    0,
+    1,
     "red",
     "bird",
     "city",
@@ -288,10 +288,10 @@
     "hyperbole"
   ],
   [
-    7.9658112526,
-    9.4801750183,
+    6.5753288269,
+    4.0004034042,
     "Like a leaf on the wind, the blue cat in the forest was agile and thinned.",
-    0,
+    2,
     "blue",
     "cat",
     "forest",
