@@ -6,7 +6,18 @@ import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import Scatterplot  from './plotdata'
-import frankenstein from './datasets/frankenstein.json'
+import data from './datasets/data.json'
+import data_labels from './datasets/data_labels.json'
+
+import data_colors from './datasets/data_colors.json'
+import data_colors_labels from './datasets/data_colors_labels.json'
+
+import data_places from './datasets/data_places.json'
+import data_places_labels from './datasets/data_places_labels.json'
+
+import data_lit from './datasets/data_lit.json'
+import data_lit_labels from './datasets/data_lit_labels.json'
+/*import frankenstein from './datasets/frankenstein.json'
 import frankenstein_labels from './datasets/frankenstein_labels.json'
 
 import frankenstein_time from './datasets/frankenstein_time.json'
@@ -16,29 +27,30 @@ import frankenstein_emotions from './datasets/frankenstein_emotions.json'
 import frankenstein_emotions_labels from './datasets/frankenstein_emotions_labels.json'
 
 import frankenstein_characters from './datasets/frankenstein_characters.json'
-import frankenstein_characters_labels from './datasets/frankenstein_characters_labels.json'
+import frankenstein_characters_labels from './datasets/frankenstein_characters_labels.json'*/
+
 
 
 const localDevURL = "http://127.0.0.1:8000/";
 axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
-let data_all ={"baseline":frankenstein,"time":frankenstein_time, "emotions":frankenstein_emotions, "characters":frankenstein_characters }
-let labels_all ={"baseline":frankenstein_labels,"time":frankenstein_time_labels, "emotions":frankenstein_emotions_labels, "characters":frankenstein_characters_labels}
-
+//let data_all ={"baseline":data,"time":frankenstein_time, "emotions":frankenstein_emotions, "characters":frankenstein_characters }
+//let labels_all ={"baseline":data_labels,"time":frankenstein_time_labels, "emotions":frankenstein_emotions_labels, "characters":frankenstein_characters_labels}
+let data_all ={"baseline":data, "colors":data_colors, "places":data_places, "lit":data_lit}
+let labels_all ={"baseline":data_labels, "colors":data_colors_labels,  "places":data_places_labels, "lit":data_lit_labels}
 function App() {
 
     
   
-  const [plottedData, setPlottedData] = useState(frankenstein);
-  const [labelData, setLabelData] = useState(frankenstein_labels);
+  const [plottedData, setPlottedData] = useState(data);
+  const [labelData, setLabelData] = useState(data_labels);
   const [loading, setLoading] = useState(false);
 
-  const [theme, setTheme] = useState('emotions');
+  const [theme, setTheme] = useState('colors');
 
 
   const handleSend = () => {
-    console.log(data_all["time"])
     setPlottedData(data_all[theme])
     setLabelData(labels_all[theme])
 
@@ -130,9 +142,9 @@ function App() {
         value={theme} 
         onChange={e => {setTheme(e.target.value)}}
         style={{ width: '40%', padding: '5px', borderRadius: '5px' }}>
-        <option value="emotions">Emotions</option>
-        <option value="time">Time of day</option>
-        <option value="characters">Characters</option>
+        <option value="colors">Colors</option>
+        <option value="places">Places</option>
+        <option value="lit">Lit Style</option>
 
       </select>
          <IconButton aria-label="send">
@@ -157,7 +169,7 @@ function App() {
         </div>
 
         <div>
-            <Scatterplot data={plottedData} labels ={labelData} width={1200} height={800} />
+            <Scatterplot data={plottedData} labels ={labelData} width={1000} height={800} />
         </div>
     </div>
   );
