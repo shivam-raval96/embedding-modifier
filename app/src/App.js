@@ -19,7 +19,7 @@ import frankenstein_characters from './datasets/frankenstein_characters.json'
 import frankenstein_characters_labels from './datasets/frankenstein_characters_labels.json'
 
 
-const localDevURL = "http://127.0.0.1:8000/";
+const localDevURL = "http://127.0.0.1:5000/";
 axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
@@ -37,12 +37,12 @@ function App() {
   const [theme, setTheme] = useState('emotions');
 
 
-  const handleSend = () => {
-    console.log(data_all["time"])
-    setPlottedData(data_all[theme])
-    setLabelData(labels_all[theme])
+  // const handleSend = () => {
+  //   console.log(data_all["time"])
+  //   setPlottedData(data_all[theme])
+  //   setLabelData(labels_all[theme])
 
-  }
+  // }
 
   const handleFileChange = (event) => {
       const file = event.target.files[0];
@@ -75,19 +75,20 @@ function App() {
   };
 
 
-  /*const handleSend = () => {
+  const handleSend = () => {
     setLoading(true)
     let req = {
-        data: selectedOption,
+        data: "placeholder",
         theme: theme,
       };
     
     axios
     .post(localDevURL + "modify-embeddings", req)
     .then((response) => {
-      console.log(response.data.data)
-      setPlottedData(frankenstein_emotions)
-      setLabelData(frankenstein_emotions_labels)
+      console.log(response.data)
+      // console.log(response.data.data)
+      setPlottedData(response.data.embeddings.data)
+      setLabelData(response.data.labels.data)
       setLoading(false)
     })
     .catch((error) => {
@@ -95,7 +96,7 @@ function App() {
       setLoading(false)
     });
     
-  };*/
+  };
 
 
 
