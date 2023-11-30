@@ -24,7 +24,7 @@ import os
 import time
 
 from openai import OpenAI
-client = OpenAI(api_key = )
+client = OpenAI(api_key = '')
 
 try:
      _create_unverified_https_context = ssl._create_unverified_context
@@ -75,7 +75,7 @@ def modify():
     prompt ="Construct a scale for "+ theme+ " going from 0 to 10. I am providing you with a two sentences. I want you to provide a number \
     that quantifies the difference between the scores for "+ theme+ " detected in the text using the constructed scale. Only provide a score and nothing else. \
     Here are the two sentences: "
-    n = 5
+    n = 8
     ids = np.random.randint(0,len(df),n)
     scores = np.zeros((n,n))
 
@@ -96,7 +96,7 @@ def modify():
     embedding = umap.fit_transform(transformed,)
     
     # clustering
-    clusterer = hdbscan.HDBSCAN(min_cluster_size=4, gen_min_span_tree=True)
+    clusterer = hdbscan.HDBSCAN(min_cluster_size=7, gen_min_span_tree=True)
     #clusterer = KMeans(n_clusters=3, random_state=42)
     clusterer.fit(embedding)
     labels = clusterer.labels_

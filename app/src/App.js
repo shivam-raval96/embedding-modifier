@@ -5,7 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
 import CircularProgress from './progress'
 import Scatterplot  from './plotdata'
-
+import ScatterPlot from './test';
 
 import data from './datasets/data2_.json'
 import data_labels from './datasets/data2__labels.json'
@@ -25,12 +25,13 @@ function App() {
   const [dataset, setDataset] = useState('data2');
   const [labelData, setLabelData] = useState(data_labels);
   const [loading, setLoading] = useState(false);
-  const [colorCol, setColorCol] = useState(-1);
+  const [colorCol, setColorCol] = useState(5);
+  const [jitter, setJitter] = useState(false)
 
   var [theme, setTheme] = useState('');
-  const [preset, setPreset] = useState(['','colors','places','emotions', 'literary_styles']);
+  const [preset, setPreset] = useState(['','colors','places','emotions', 'time_of_day','literary_styles']);
 
- //
+ const colorColCode={ colors:4, animals:5, places: 6, time_of_day:7, emotions: 8, literary_styles:9}
 
   const loadData = (dataset) => {
 
@@ -41,6 +42,8 @@ function App() {
   
       setPlottedData(data2)
       setLabelData(data_labels2)
+      if (theme!=''){
+        setColorCol(colorColCode[theme])}
       setLoading(false)
   
      }
@@ -145,7 +148,7 @@ function App() {
             }}>
 
         
-        <h2>Embedding Projection Modifier</h2>
+        <h2>Instruct to trasform embeddings</h2>
 
        Dataset: <select 
         value={dataset} 
@@ -153,6 +156,8 @@ function App() {
         style={{ width: '40%', padding: '5px', borderRadius: '5px' }}>
         <option value="data">Synth25</option>
         <option value="data2">Synth200</option>
+        <option value="hcipapers">HCI Papers</option>
+        <option value="hp">Harry Potter</option>
 
       </select>
 
@@ -168,6 +173,7 @@ function App() {
           <option value="colors"></option>
           <option value="places"></option>
           <option value="emotions"></option>
+          <option value="time_of_day"></option>
           <option value="literary_styles"></option>
         </datalist>
          
@@ -212,7 +218,7 @@ function App() {
         </div>
 
         <div>
-            <Scatterplot data={plottedData} labels ={labelData} colorCol ={colorCol} width={1000} height={800} />
+            <Scatterplot data={plottedData} labels ={labelData} colorCol ={colorCol} jitter = {jitter} width={1000} height={800} />
         </div>
     </div>
   );
