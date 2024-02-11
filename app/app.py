@@ -4,6 +4,8 @@ from flask_restful import reqparse
 import pandas as pd
 import io
 from umap import UMAP
+from metric_learn import NCA
+
 # import logging
 
 from sklearn.cluster import KMeans
@@ -24,7 +26,7 @@ import os
 import time
 
 from openai import OpenAI
-client = OpenAI(api_key = '')
+client = OpenAI(api_key = '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')
 
 try:
      _create_unverified_https_context = ssl._create_unverified_context
@@ -63,6 +65,61 @@ def home():
 # Performs selected dimensionality reduction method (reductionMethod) on uploaded data (data), considering selected parameters (perplexity, selectedCol)
 @app.route("/modify-embeddings", methods=["POST"])
 def modify():
+
+    #data = request.json['data']
+    dataset = request.json['dataset']
+    theme = request.json['theme']
+    print("Cluster by:", theme)
+
+    # df = pd.read_csv('src/datasets/f_emb.csv')
+    df = pd.read_csv('src/datasets/'+dataset+'_emb.csv')
+
+    scaleprompt ="Construct a detailed scale for "+ theme+ " going from 0 to 10. Be as fine grained as you need to be. Return only a json dictionary."
+    scale = getGPTresponse(scaleprompt, theme)
+    prompt ="Here is a scale for "+theme+ ": "+scale+" I am providing you with a sentence. I want you to provide a number \
+    that quantifies the "+ theme+ " detected in the text using the provided scale, interpolate if needed, but the score has to be an integer. You MUST only provide a score and nothing else. If you can't detected anything, return 100.\
+    Here is the sentence: "
+    '''prompt ="Construct a scale for "+ theme+ " going from 0 to 10.  I am providing you with a sentence. I want you to provide a number \
+    that quantifies the "+ theme+ " detected in the text using the provided scale, interpolate if needed, but the score has to be an integer. You MUST only provide a score and nothing else. If you can't detected anything, return 100.\
+    Here is the sentence:"'''
+    n = 8
+    ids = np.random.choice(np.linspace(0,len(df)-1,len(df)), size=n, replace=False).astype(int)
+    targets = np.zeros(n)
+
+    for i in range(n):
+            result = getScore(df['text'][i], prompt, theme) #getScorewithScale(df['text'][i], promptWscale, theme) 
+            targets[i] = result
+
+
+
+    nca = NCA(random_state=42,max_iter=200, n_components=2)
+    nca.fit(df.iloc[ids, 0:768], targets)
+    embedding = nca.transform(df.iloc[:,0:768])
+
+    umap = UMAP(n_components=2)
+    embedding = umap.fit_transform(embedding)
+    
+    # clustering
+    clusterer = hdbscan.HDBSCAN(min_cluster_size=7, gen_min_span_tree=True)
+    #clusterer = KMeans(n_clusters=3, random_state=42)
+    clusterer.fit(embedding)
+    labels = clusterer.labels_
+   
+    
+    df_mod = pd.DataFrame(embedding)
+    df_mod['text'] = df['text']
+    df_mod['cluster'] = labels
+    df_mod = df_mod.join(df.iloc[:,-6:])
+
+    # label clusters
+    df_clstr = get_cluster_labels(df_mod, theme)
+
+    return {"embeddings": json.loads(df_mod.to_json(orient='values')),
+            "labels": json.loads(df_clstr.to_json(orient='values'))}
+
+    # return jsonify(data, theme)     # 🧪 testing only
+
+def modify_old():
 
     #data = request.json['data']
     dataset = request.json['dataset']
@@ -114,6 +171,41 @@ def modify():
             "labels": json.loads(df_clstr.to_json(orient='values'))}
 
     # return jsonify(data, theme)     # 🧪 testing only
+
+def getGPTresponse(prompt, theme):
+    
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are an expert in comparing and analyzing "+ theme+"."},
+            {"role": "user", "content": prompt},
+        ],
+        temperature= 0.0
+    )
+    
+    try:
+        result = response.choices[0].message.content
+    except:
+        result = []
+    
+    return result
+def getScore(text,prompt, theme):
+    
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are an expert in comparing and analyzing "+ theme+"."},
+            {"role": "user", "content": prompt+text},
+        ],
+        temperature= 0.0
+    )
+    
+    try:
+        result = response.choices[0].message.content
+    except:
+        result = []
+    
+    return result
 
 def get_score(text1, text2, prompt, theme):
     

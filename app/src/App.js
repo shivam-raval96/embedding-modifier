@@ -5,8 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
 import CircularProgress from './progress'
 import Scatterplot  from './plotdata'
-import ScatterPlot from './test';
-
+import ScatterplotImg from './plotdataImg';
 import data from './datasets/data2_.json'
 import data_labels from './datasets/data2__labels.json'
 
@@ -148,7 +147,7 @@ function App() {
             }}>
 
         
-        <h2>Instruct to trasform embeddings</h2>
+        <h2>Instruct to transform embeddings</h2>
 
        Dataset: <select 
         value={dataset} 
@@ -218,8 +217,29 @@ function App() {
         </div>
 
         <div>
-            <Scatterplot data={plottedData} labels ={labelData} colorCol ={colorCol} jitter = {jitter} width={1000} height={800} />
+            <ScatterplotImg data={plottedData} labels ={labelData} colorCol ={colorCol} jitter = {jitter} width={1000} height={800} />
+
         </div>
+
+
+        <div style={{ position: 'fixed', top: '40%', left: 20, width: '300px', height:'500px', backgroundColor: 'rgba(0, 0, 0, 0.02)',
+                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
+                borderRadius: '20px' ,                         // Curved edges
+                fontFamily: 'Perpetua',  // Setting the font family
+                overflowY: 'scroll'// <Scatterplot data={plottedData} labels ={labelData} colorCol ={colorCol} jitter = {jitter} width={1000} height={800} />
+
+                
+
+            }}><h3>Selection</h3>
+            <div id = "selectioncontent" style={{ padding:'5px', }} ></div>
+              <table>
+                <tbody id="myTable">
+
+                </tbody>
+              </table>
+            </div>
+
+
     </div>
   );
 }
