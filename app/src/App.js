@@ -160,22 +160,13 @@ function App() {
       </select>
       <br/>
       Color by: &nbsp;
-         <select 
+         <select  id="selectColorCol"
         value={colorCol} 
         onChange={e => {setColorCol(e.target.value)}}
         style={{ width: '37%', padding: '5px', borderRadius: '5px' }}>
         <option value="-1">DBSCAN Clusters</option>
 
-        <option value="4">Colors</option>
-        <option value="5">Animals</option>
-
-        <option value="6">Places</option>
-
-        <option value="7">Time</option>
-        <option value="8">Emotion</option>
-        <option value="9">Characters</option>
-        <option value="10">Actions</option>
-        <option value="11">Lit Style</option>
+        <option value="4">Artists</option>
 
       </select>
       
