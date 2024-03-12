@@ -6,8 +6,8 @@ import IconButton from '@mui/material/IconButton';
 import CircularProgress from './progress'
 import Scatterplot  from './plotdata'
 import ScatterplotImg from './plotdataImg';
-import data from './datasets/data2_.json'
-import data_labels from './datasets/data2__labels.json'
+import data from './datasets/art_.json'
+//import data_labels from './datasets/data2__labels.json'
 
 
 
@@ -21,26 +21,26 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 function App() {
 
   const [plottedData, setPlottedData] = useState(data);
-  const [dataset, setDataset] = useState('data2');
-  const [labelData, setLabelData] = useState(data_labels);
+  const [dataset, setDataset] = useState('8attrLarge');
+  const [labelData, setLabelData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [colorCol, setColorCol] = useState(5);
+  const [colorCol, setColorCol] = useState(4);
   const [jitter, setJitter] = useState(false)
 
   var [theme, setTheme] = useState('');
-  const [preset, setPreset] = useState(['','colors','places','emotions', 'time_of_day','literary_styles']);
+  const [preset, setPreset] = useState(['','colors','animals','places','emotions', 'time_of_day', 'characters', 'actions','literary_styles']);
 
- const colorColCode={ colors:4, animals:5, places: 6, time_of_day:7, emotions: 8, literary_styles:9}
+ const colorColCode={ colors:4, animals:5, places: 6, time_of_day:7, emotions: 8, characters: 9, actions: 10, literary_styles:11}
 
   const loadData = (dataset) => {
 
     try {
-      var data_labels2= require('./datasets/'+dataset+'_'+theme+'_labels.json')
+      //var data_labels2= require('./datasets/'+dataset+'_'+theme+'_labels.json')
       var data2= require('./datasets/'+dataset+'_'+theme+'.json');
   
   
       setPlottedData(data2)
-      setLabelData(data_labels2)
+      //setLabelData(data_labels2)
       if (theme!=''){
         setColorCol(colorColCode[theme])}
       setLoading(false)
@@ -139,7 +139,7 @@ function App() {
   return (
     <div className="App">
       
-      <div style={{ position: 'fixed', top: 20, left: 20, width: '300px', backgroundColor: 'rgba(0, 0, 0, 0.1)',
+      <div style={{ position: 'fixed', top: 20, left: 20, width: '350px', height:'380px', backgroundColor: 'rgba(0, 0, 0, 0.1)',
                  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
                 borderRadius: '20px' ,                         // Curved edges
                 fontFamily: 'Perpetua'  // Setting the font family
@@ -153,40 +153,17 @@ function App() {
         value={dataset} 
         onChange={e => {setDataset(e.target.value);theme='';setTheme('');console.log(e.target.value);loadData(e.target.value)}}
         style={{ width: '40%', padding: '5px', borderRadius: '5px' }}>
-        <option value="data">Synth25</option>
-        <option value="data2">Synth200</option>
-        <option value="hcipapers">HCI Papers</option>
+        <option value="data">Synth200</option>
+        <option value="art">Art Data</option>
         <option value="hp">Harry Potter</option>
 
       </select>
-
-      <button  style={{ margin:"15px", padding: '5px'}}onClick={handleDownload}>Save View</button>
-  
-       <label for="theme-choice">Group by: </label>
-        <input list="theme-options" id="theme-choice" name="theme-choice" type="search"
-        value={theme}
-                    onChange={e => {setTheme(e.target.value)}}
-                    />
-
-        <datalist id="theme-options">
-          <option value="colors"></option>
-          <option value="places"></option>
-          <option value="emotions"></option>
-          <option value="time_of_day"></option>
-          <option value="literary_styles"></option>
-        </datalist>
-         
-         <IconButton aria-label="send">
-
-            {(loading)?<CircularProgress size="1.5rem"  color="inherit"style={{}}/>:<SendIcon onClick={handleSend}/>}
-         
-       </IconButton>
-            <br/>
-       Color by: &nbsp;
+      <br/>
+      Color by: &nbsp;
          <select 
         value={colorCol} 
         onChange={e => {setColorCol(e.target.value)}}
-        style={{ width: '40%', padding: '5px', borderRadius: '5px' }}>
+        style={{ width: '37%', padding: '5px', borderRadius: '5px' }}>
         <option value="-1">DBSCAN Clusters</option>
 
         <option value="4">Colors</option>
@@ -196,11 +173,69 @@ function App() {
 
         <option value="7">Time</option>
         <option value="8">Emotion</option>
-        <option value="9">Lit Style</option>
+        <option value="9">Characters</option>
+        <option value="10">Actions</option>
+        <option value="11">Lit Style</option>
 
       </select>
+      
       <br/>
-      <br/>
+
+  
+       <label for="theme-choice"><b>Group by:</b> </label>
+        <input list="theme-options" id="theme-choice" name="theme-choice" type="search"
+
+        style={{
+        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
+       borderRadius: '20px' ,                         // Curved edges
+       fontFamily: 'Perpetua',  // Setting the font family
+       overflowY: 'scroll',
+       padding: '10px',
+       fontSize: '16px', // Larger font size for better readability
+       border: '2px solid #007bff', // Solid border with a color
+       borderRadius: '10px', // Rounded corners
+       color: '#495057', // Text color
+       margin: '10px 0', // Margin to space out elements
+       transition: 'border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out', // Smooth transition for focus
+       
+       }}
+
+        onFocus={(e) => {
+                e.target.style.borderColor = '#0056b3'; // Darker border on focus
+                e.target.style.boxShadow = '0 0 0 0.2rem rgba(0, 123, 255, 0.5)'; // Glow effect on focus
+              }}
+        onBlur={(e) => {
+                e.target.style.borderColor = '#007bff'; // Revert border color on blur
+                e.target.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.5)'; // Revert box shadow on blur
+              }}
+                value={theme}
+                    onChange={e => {setTheme(e.target.value)}}
+                    />
+
+        <datalist id="theme-options">
+          <option value="colors"></option>
+          <option value="animals"></option>
+          <option value="places"></option>
+          <option value="emotions"></option>
+          <option value="time_of_day"></option>
+          <option value="characters"></option>
+          <option value="actions"></option>
+          <option value="literary_styles"></option>
+        </datalist>
+         
+         <IconButton aria-label="send">
+
+            {(loading)?<CircularProgress size="1.5rem"  color="inherit"style={{}}/>:<SendIcon onClick={handleSend}/>}
+         
+       </IconButton>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <button  style={{ margin:"15px", padding: '5px'}}onClick={handleDownload}>Save View</button>
+
 
         <p style={{ paddingLeft: "15px",paddingRight: "15px", display:'none'}} align="left" >Each point is an embedded text. Visual clusters are identified by a clustering algorithm. <br /><br />
       This clustering may not be optimal for your task. You can change this!<br /><br />

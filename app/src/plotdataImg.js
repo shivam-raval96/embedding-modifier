@@ -46,26 +46,45 @@ function getEncodedArray(array, stringToNumberMap){
 
 }
 
-function getPieDistribution(data, labels) {
-    let distribution = {};
 
-    for (let i = 0; i < labels.length; i++) {
-        let label = labels[i];
-        let item = data[i];
+const Legend = ({ stringToNumberMap, colors }) => {
+  return (
+    <div style={{
+      padding: '10px',
+      border: '1px solid #ccc',
+      borderRadius: '5px',
+      backgroundColor: '#fff',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      maxWidth: '200px',
+      fontFamily: 'Arial, sans-serif',
+      fontSize: '20px'
+    }}>
+      <h3 style={{ textAlign: 'center' }}>Legend</h3>
+      {Object.keys(stringToNumberMap).map((label, index) => (
+        <div key={index} style={{
+          display: 'flex',
+          alignItems: 'center',
+          marginBottom: '4px',
+        }}>
+          <span style={{
+            display: 'inline-block',
+            width: '20px',
+            height: '20px',
+            borderRadius: '50%',
+            backgroundColor: colors[stringToNumberMap[label] % colors.length],
+            marginRight: '10px',
+            fontSize: '18px'
+          }}></span>
+          <span>{label}</span>
+          <br/>
+          <br/>
+        </div>
+      ))}
+    </div>
+  );
+};
 
-        if (!distribution[label]) {
-            distribution[label] = {};
-        }
 
-        if (!distribution[label][item]) {
-            distribution[label][item] = 0;
-        }
-
-        distribution[label][item]++;
-    }
-
-    return distribution;
-}
 
 function trackPointer(e, { start, move, out, end }) {
     const tracker = {},
@@ -109,6 +128,7 @@ function Scatterplot(props) {
   const ref = useRef();
   const [pieCharts, setPieCharts] = useState([])
   const defaultLasso = [[0,0]]
+  const [stringToNumberMap, setStringToNumberMap] = useState({'0':'none'});
 
   useEffect(() => {
     data.forEach((d,i)=>{
@@ -312,71 +332,23 @@ function Scatterplot(props) {
 
     //SetcolorCol
     if (colorCol!=-1){
-        var array = getColumn(data,colorCol)
-        var stringToNumberMap = encodeArray(array);
+      var array = getColumn(data,colorCol)
+      setStringToNumberMap(encodeArray(array)) ;
 
 
-    }else{
-        var array = getColumn(data,3)
-        var stringToNumberMap= encodeArray(getColumn(data,3))
 
-    }
+  }else{
+      var array = getColumn(data,3)
+      setStringToNumberMap(encodeArray(getColumn(data,3)))
+  }
 
 
 
     var color_idx = getEncodedArray(array, stringToNumberMap)
 
-    let result = getPieDistribution(getColumn(data,colorCol), getColumn(data,3));
-
     console.log(colorCol,stringToNumberMap)
 
-     // Bind data to circles
-     /*const circles = svg.selectAll('circle').data(data);
-
-     // Enter new circles
-     circles.enter().append('circle')
-         .attr('cx', d => xScale(d[0]))
-         .attr('cy', d => yScale(d[1]))
-         .attr('r', r_small)
-        .style("opacity", 0.9)
-        .attr('fill', (d,i) =>  colors[color_idx[i]%10])
-        .attr('stroke', 'black')  // Add this line for the boundary color
-        .attr('stroke-width', 0.5)  // Add this line for the boundary width
-        .style("z-index", 2)
-        .on("mouseover", (event, d) => {
-
-            svg.selectAll('circle')
-            .transition().duration(100)
-            .style("opacity", 0.9) 
-            .attr('stroke-width', 0.5) 
-            .attr('r', r_small);
-            d3.select(event.currentTarget).transition().duration(100)
-                .style("opacity", 1) 
-                .attr('stroke-width', 0.5)  // Add this line for the boundary width
-                .attr('r', r_big);
-
-
-
-            tooltip.transition()
-                .duration(100)
-                .style("opacity", .9);
-            tooltip.html(d[2])
-                .style("left", (event.pageX + 5) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        })
-        .on("mouseout", (d) => {
-            tooltip.transition()
-                .duration(500)
-                .style("opacity", 0);
-        })
-
-     // Update existing circles
-     circles.attr('fill', (d,i) =>  colors[color_idx[i]%10]).transition().ease(d3.easeLinear).duration(1500)
-         .attr('cx', d => xScale(d[0]))
-         .attr('cy', d => yScale(d[1]));
-
-     // Remove old circles
-     circles.exit().remove();*/
+  
      let size = 30
      let enlargedSize = size*6
 
@@ -414,7 +386,7 @@ function Scatterplot(props) {
 
         tooltip.transition()
             .duration(100)
-            .style("opacity", .9);
+            .style("opacity", 0);
         tooltip.html(d[2])
             .style("left", (event.pageX + 5) + "px")
             .style("top", (event.pageY - 28) + "px");
@@ -441,58 +413,13 @@ function Scatterplot(props) {
      svg.call(lasso().on("start lasso end", draw));
      draw(defaultLasso);
     
-    /*var points=svg.selectAll('circle')
-        .data(data)
-        .enter()
-        .append('circle')
-        .attr('cx', d => xScale(d[0]))
-        .attr('cy', d => yScale(d[1]))
-        .attr('r', 4)
-        .style("opacity", 0.9)
-        .attr('fill', (d,i) =>  colors[color_idx[i]%10])
-        .attr('stroke', 'black')  // Add this line for the boundary color
-        .attr('stroke-width', 0.5)  // Add this line for the boundary width
-        .on("mouseover", (event, d) => {
-
-            svg.selectAll('circle')
-            .transition().duration(100)
-            .style("opacity", 0.9) 
-            .attr('stroke-width', 0.5) 
-            .attr('r', 4);
-            d3.select(event.currentTarget).transition().duration(100)
-                .style("opacity", 1) 
-                .attr('stroke-width', 0.5)  // Add this line for the boundary width
-                .attr('r', 10);
-
-
-
-            tooltip.transition()
-                .duration(100)
-                .style("opacity", .9);
-            tooltip.html(d[2])
-                .style("left", (event.pageX + 5) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        })
-        .on("mouseout", (d) => {
-            tooltip.transition()
-                .duration(500)
-                .style("opacity", 0);
-        }).transition() // start a transition
-        .duration(2000) // 2 seconds;
-
-        
-        
-        if (jitter){
-            points.attr("cx", function(d,i) { return xScale(d[0])+ 2*Math.random() });
-            points.attr("cy", function(d,i) { return yScale(d[1])+ 2*Math.random() });
-            
-        }*/
+  
 
 
 
     // Bind data to text elements and add labels
 
-    svg.selectAll('text.label')
+    /*svg.selectAll('text.label')
         .data(labels)
         .enter()
         .append('text')
@@ -508,37 +435,8 @@ function Scatterplot(props) {
         .attr('stroke-width', '0.3px') 
         .attr('font-size', '28px')
         .attr('font-weight', '500').transition().duration(1000).attr('opacity', 1)
-        ;
+        ;*/
     
-        var labeldata_all = []
-        for (const [label, value] of Object.entries(result)) {
-            var piedata = []
-            var i =0
-            for (const [key, count] of Object.entries(value)){
-                
-                piedata.push({ title: key, value: count, color: colors[stringToNumberMap[key]] })
-                i+=1
-            }
-            labeldata_all.push(piedata)
-          }
-
-
-   
-        
-        var pies = []
-        labeldata_all.forEach((e,i)=>{
-            pies.push(<><p style={{position:'relative', top:'40px',left:'20px'}}>Cluster {i}</p><PieChart data={e} label={({ dataEntry }) => dataEntry.title}
-        labelStyle={(index) => ({
-            fontSize: '8px',
-            fontFamily: 'sans-serif',
-          })}
-          center={[65,50]}
-          radius={20}
-          labelPosition={120}/></>)
-        })
-
-        setPieCharts(pies)
-        console.log('hello')
 
 
   }, [data, labels, width, height, colorCol, jitter]);
@@ -547,14 +445,16 @@ function Scatterplot(props) {
     <>
             
         <svg ref={ref} width={width} height={height}></svg>
-        <div id = 'legend' style={{ position: 'fixed', top: '2%', left: '86%', width: '200px',height:'95%', backgroundColor: 'rgba(0, 0, 0, 0.02)',
+        <div id = 'legend' style={{ position: 'fixed', top: '2%', left: '86%', width: '200px',backgroundColor: 'rgba(0, 0, 0, 0.02)',
                  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
                 borderRadius: '20px' ,                         // Curved edges
+                fontSize: '16px', // Larger font size for better readability
                 fontFamily: 'Perpetua',  // Setting the font family
                 overflowY: 'scroll'
                 }}>
         
-            <div style={{ width:'150px',}}>{pieCharts}</div>
+            <Legend stringToNumberMap={stringToNumberMap} colors={colors} />
+
             
             </div>;
     </>

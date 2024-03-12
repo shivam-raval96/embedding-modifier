@@ -67,6 +67,43 @@ function getPieDistribution(data, labels) {
     return distribution;
 }
 
+const Legend = ({ stringToNumberMap, colors }) => {
+  return (
+    <div style={{
+      padding: '10px',
+      border: '1px solid #ccc',
+      borderRadius: '5px',
+      backgroundColor: '#fff',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      maxWidth: '200px',
+      fontFamily: 'Arial, sans-serif',
+      fontSize: '20px'
+    }}>
+      <h3 style={{ textAlign: 'center' }}>Legend</h3>
+      {Object.keys(stringToNumberMap).map((label, index) => (
+        <div key={index} style={{
+          display: 'flex',
+          alignItems: 'center',
+          marginBottom: '4px',
+        }}>
+          <span style={{
+            display: 'inline-block',
+            width: '20px',
+            height: '20px',
+            borderRadius: '50%',
+            backgroundColor: colors[stringToNumberMap[label] % colors.length],
+            marginRight: '10px',
+            fontSize: '18px'
+          }}></span>
+          <span>{label}</span>
+          <br/>
+          <br/>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 function trackPointer(e, { start, move, out, end }) {
     const tracker = {},
       id = (tracker.id = e.pointerId),
@@ -109,6 +146,10 @@ function Scatterplot(props) {
   const ref = useRef();
   const [pieCharts, setPieCharts] = useState([])
   const defaultLasso = [[0,0]]
+
+  const [searchQuery, setSearchQuery] = useState('this is a test');
+  const [stringToNumberMap, setStringToNumberMap] = useState({'0':'none'});
+
 
   useEffect(() => {
     data.forEach((d,i)=>{d.id = i})
@@ -262,7 +303,7 @@ function Scatterplot(props) {
         .style("margin-right", "50px")
         .style("position", "absolute");
 
-
+  console.log(data)
     // Bind data to circles and add tooltips
     //console.log(labels)
     // Compute the density contours.
@@ -296,13 +337,13 @@ function Scatterplot(props) {
     //SetcolorCol
     if (colorCol!=-1){
         var array = getColumn(data,colorCol)
-        var stringToNumberMap = encodeArray(array);
+        setStringToNumberMap(encodeArray(array)) ;
+
 
 
     }else{
         var array = getColumn(data,3)
-        var stringToNumberMap= encodeArray(getColumn(data,3))
-
+        setStringToNumberMap(encodeArray(getColumn(data,3)))
     }
 
 
@@ -320,8 +361,8 @@ function Scatterplot(props) {
      circles.enter().append('circle')
          .attr('cx', d => xScale(d[0]))
          .attr('cy', d => yScale(d[1]))
-         .attr('r', r_small)
-        .style("opacity", 0.9)
+         .attr('r', d => d[2].toLowerCase().includes(searchQuery.toLowerCase()) ? r_big : r_small)
+         .style("opacity", 0.9)
         .attr('fill', (d,i) =>  colors[color_idx[i]%10])
         .attr('stroke', 'black')  // Add this line for the boundary color
         .attr('stroke-width', 0.5)  // Add this line for the boundary width
@@ -332,18 +373,22 @@ function Scatterplot(props) {
             .transition().duration(100)
             .style("opacity", 0.9) 
             .attr('stroke-width', 0.5) 
-            .attr('r', r_small);
+            //.attr('r', r_small);
             d3.select(event.currentTarget).transition().duration(100)
                 .style("opacity", 1) 
-                .attr('stroke-width', 0.5)  // Add this line for the boundary width
-                .attr('r', r_big);
+                .attr('stroke-width', 4)  // Add this line for the boundary width
+                //.attr('r', r_small);
 
-
+            let highlightedText = d[2];
+            if (searchQuery) {
+                  const regex = new RegExp(`(${searchQuery})`, 'gi');
+                  highlightedText = highlightedText.replace(regex, "<span style='background-color: yellow;'>$1</span>");
+                }
 
             tooltip.transition()
                 .duration(100)
                 .style("opacity", .9);
-            tooltip.html(d[2])
+            tooltip.html(highlightedText)
                 .style("left", (event.pageX + 5) + "px")
                 .style("top", (event.pageY - 28) + "px");
         })
@@ -353,11 +398,15 @@ function Scatterplot(props) {
                 .style("opacity", 0);
         })
 
+      circles.attr('r', d => d[2].toLowerCase().includes(searchQuery.toLowerCase()) ? r_big : r_small); // Adjust the dot size based on the search query
+
+     
      // Update existing circles
      circles.attr('fill', (d,i) =>  colors[color_idx[i]%10]).transition().ease(d3.easeLinear).duration(1500)
          .attr('cx', d => xScale(d[0]))
-         .attr('cy', d => yScale(d[1]));
+         .attr('cy', d => yScale(d[1]))
 
+      
      // Remove old circles
      circles.exit().remove();
 
@@ -414,24 +463,25 @@ function Scatterplot(props) {
 
 
     // Bind data to text elements and add labels
-
-    svg.selectAll('text.label')
-        .data(labels)
-        .enter()
-        .append('text')
-        .attr('class', 'label')
-        .attr('fill', 'black')  
-        .attr('x', d => xScale(d[0])) 
-        .attr('y', d => yScale(d[1]))
-        .attr('dy', '.35em')  
-        .attr('text-anchor', 'middle')
-        .attr('opacity', 0)
-        .text((d,i) => `Cluster ${i}`)
-        .attr('stroke', 'black')  
-        .attr('stroke-width', '0.3px') 
-        .attr('font-size', '28px')
-        .attr('font-weight', '500').transition().duration(1000).attr('opacity', 1)
-        ;
+if(labels){
+  svg.selectAll('text.label')
+  .data(labels)
+  .enter()
+  .append('text')
+  .attr('class', 'label')
+  .attr('fill', 'black')  
+  .attr('x', d => xScale(d[0])) 
+  .attr('y', d => yScale(d[1]))
+  .attr('dy', '.35em')  
+  .attr('text-anchor', 'middle')
+  .attr('opacity', 0)
+  .text((d,i) => d[2])//`Cluster ${i}`
+  .attr('stroke', 'black')  
+  .attr('stroke-width', '0.3px') 
+  .attr('font-size', '28px')
+  .attr('font-weight', '500').transition().duration(1000).attr('opacity', 1)
+  ;
+}
     
         var labeldata_all = []
         for (const [label, value] of Object.entries(result)) {
@@ -463,20 +513,50 @@ function Scatterplot(props) {
         setPieCharts(pies)
         console.log(array)
 
-  }, [data, labels, width, height, colorCol, jitter]);
+  }, [data, labels, width, height, colorCol, jitter,searchQuery,stringToNumberMap]);
 
   return (
     <>
-            
-        <svg ref={ref} width={width} height={height}></svg>
-        <div id = 'legend' style={{ position: 'fixed', top: '2%', left: '86%', width: '200px',height:'95%', backgroundColor: 'rgba(0, 0, 0, 0.02)',
+        <input
+      type="text"
+      placeholder="Search..."
+      value={searchQuery}
+      onChange={(e) => {console.log(e.target.value);return setSearchQuery(e.target.value)}}
+      style={{ position: 'fixed', top: '22%', left: '5.2%', backgroundColor: 'rgba(0, 0, 0, 0.02)',
                  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
                 borderRadius: '20px' ,                         // Curved edges
+                fontFamily: 'Perpetua',  // Setting the font family
+                overflowY: 'scroll',
+                padding: '10px',
+                fontSize: '16px', // Larger font size for better readability
+                border: '2px solid #007bff', // Solid border with a color
+                borderRadius: '10px', // Rounded corners
+                color: '#495057', // Text color
+                margin: '10px 0', // Margin to space out elements
+                transition: 'border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out', // Smooth transition for focus
+                
+                }}
+
+      onFocus={(e) => {
+                  e.target.style.borderColor = '#0056b3'; // Darker border on focus
+                  e.target.style.boxShadow = '0 0 0 0.2rem rgba(0, 123, 255, 0.5)'; // Glow effect on focus
+                }}
+      onBlur={(e) => {
+                  e.target.style.borderColor = '#007bff'; // Revert border color on blur
+                  e.target.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.5)'; // Revert box shadow on blur
+                }}
+    />
+        <svg ref={ref} width={width} height={height}></svg>
+        <div id = 'legend' style={{ position: 'fixed', top: '2%', left: '86%', width: '200px',backgroundColor: 'rgba(0, 0, 0, 0.02)',
+                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
+                borderRadius: '20px' ,                         // Curved edges
+                fontSize: '16px', // Larger font size for better readability
                 fontFamily: 'Perpetua',  // Setting the font family
                 overflowY: 'scroll'
                 }}>
         
-            <div style={{ width:'150px',}}>{pieCharts}</div>
+            <Legend stringToNumberMap={stringToNumberMap} colors={colors} />
+
             
             </div>;
     </>
@@ -484,3 +564,4 @@ function Scatterplot(props) {
 }
 
 export default Scatterplot;
+//            //<div style={{ width:'150px',}}>{pieCharts}</div>
