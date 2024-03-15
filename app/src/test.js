@@ -11,7 +11,7 @@ function ScatterPlot() {
 
     function generateRandomData() {
         // Generate random data points
-        return Array.from({ length: 20 }, () => ({
+        return Array.from({ length: 50 }, () => ({
             x: Math.random() * 100,
             y: Math.random() * 100
         }));
@@ -23,8 +23,8 @@ function ScatterPlot() {
         const height = +svg.attr('height');
 
         // Scale functions
-        const xScale = d3.scaleLinear().domain([0, 100]).range([0, width]);
-        const yScale = d3.scaleLinear().domain([0, 100]).range([height, 0]);
+        const xScale = d3.scaleLinear().domain([-5, 105]).range([0, width-20]);
+        const yScale = d3.scaleLinear().domain([-5, 105]).range([height-30, 0]);
 
         // Bind data to circles
         const circles = svg.selectAll('circle').data(data);
@@ -34,7 +34,10 @@ function ScatterPlot() {
             .attr('cx', d => xScale(d.x))
             .attr('cy', d => yScale(d.y))
             .attr('r', 5)
-            .style('fill', 'blue');
+            .style('fill', 'lightsteelblue')
+            .style('stroke-width', '0.5')
+            .style('stroke', 'black');
+            ;
 
         // Update existing circles
         circles.transition().duration(2000)
