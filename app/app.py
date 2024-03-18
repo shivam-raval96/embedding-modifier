@@ -28,7 +28,12 @@ import os
 import time
 
 from openai import OpenAI
-client = OpenAI(api_key = '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')
+
+with open("secrets.json") as f:
+    secrets = json.load(f)
+    keys = secrets["keys"]
+
+client = OpenAI(api_key = keys[0])
 
 try:
      _create_unverified_https_context = ssl._create_unverified_context
@@ -56,7 +61,8 @@ learning_rate = 0.01
 num_epochs = 5000  # default 10000
 weight_decay = 0.001  # L2 regularization strength
 
-app = Flask(__name__, static_url_path='', static_folder='build')
+app = Flask(__name__, static_url_path='', static_folder='build')  # original CRA directory
+# app = Flask(__name__, static_url_path='', static_folder='steerable-vite/dist') # Vite directory
 cors = CORS(app)
 # logging.basicConfig(filename='flask.log', level=logging.DEBUG)
 
@@ -344,6 +350,7 @@ def getScoreJSON(prompt, theme):
         result = []
     
     return result
+
 def getScore(text,prompt, theme):
     
     response = client.chat.completions.create(

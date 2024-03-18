@@ -1,0 +1,481 @@
+color,animal,place,time,emotion,names,action,figures_of_speech
+blue,bird,city,evening,scared,Alice,play,simile
+yellow,bear,beach,morning,angry,Diana,dance,simile
+black,bird,beach,evening,scared,Diana,play,simile
+red,frog,city,afternoon,sad,Charlie,work,simile
+red,fish,mountain,evening,sad,Alice,play,simile
+yellow,cat,mountain,midnight,happy,Bobby,walk,simile
+black,fish,desert,midnight,scared,Alice,work,simile
+blue,bear,city,morning,angry,Evelyn,walk,simile
+white,fish,city,midnight,surprised,Alice,walk,simile
+red,bear,mountain,midnight,happy,Charlie,jump,simile
+black,bear,city,afternoon,angry,Charlie,dance,simile
+black,bear,city,night,scared,Diana,play,simile
+white,fish,desert,midnight,sad,Alice,work,simile
+black,bird,mountain,midnight,angry,Diana,walk,simile
+blue,bird,forest,evening,surprised,Bobby,play,simile
+red,bear,mountain,evening,scared,Charlie,work,simile
+yellow,fish,desert,morning,angry,Bobby,play,simile
+red,cat,beach,night,scared,Evelyn,jump,simile
+black,frog,beach,evening,sad,Diana,work,simile
+red,bird,mountain,midnight,scared,Alice,dance,simile
+white,fish,desert,morning,sad,Bobby,play,simile
+red,cat,desert,morning,scared,Bobby,play,simile
+white,bird,forest,night,sad,Diana,dance,simile
+black,fish,desert,afternoon,scared,Bobby,work,simile
+red,bear,mountain,morning,scared,Bobby,dance,simile
+black,fish,desert,midnight,surprised,Charlie,jump,simile
+yellow,frog,mountain,morning,scared,Charlie,dance,simile
+black,bird,forest,night,happy,Alice,dance,simile
+yellow,fish,city,night,angry,Bobby,jump,simile
+blue,bear,mountain,midnight,surprised,Evelyn,walk,simile
+white,cat,beach,night,scared,Alice,dance,simile
+yellow,bear,beach,midnight,angry,Bobby,jump,simile
+black,bear,mountain,evening,sad,Evelyn,play,simile
+black,frog,city,midnight,angry,Evelyn,work,simile
+black,bird,forest,night,angry,Diana,play,simile
+red,bear,beach,night,sad,Alice,play,simile
+red,cat,mountain,morning,scared,Evelyn,walk,simile
+red,frog,beach,afternoon,sad,Charlie,dance,simile
+yellow,cat,forest,midnight,sad,Alice,walk,simile
+white,bird,city,midnight,scared,Bobby,jump,simile
+blue,bear,beach,afternoon,angry,Alice,play,simile
+red,fish,mountain,midnight,sad,Alice,play,simile
+black,bear,beach,morning,angry,Bobby,work,simile
+white,cat,forest,afternoon,surprised,Diana,jump,simile
+white,bird,forest,midnight,surprised,Bobby,dance,simile
+white,bear,mountain,afternoon,scared,Evelyn,jump,simile
+blue,frog,forest,evening,angry,Diana,play,simile
+white,bird,city,midnight,surprised,Evelyn,play,simile
+blue,bear,city,morning,surprised,Charlie,dance,simile
+white,fish,beach,midnight,happy,Evelyn,work,simile
+yellow,fish,forest,afternoon,surprised,Bobby,walk,simile
+red,cat,desert,morning,surprised,Bobby,play,simile
+yellow,bear,forest,afternoon,scared,Charlie,jump,simile
+red,frog,beach,evening,angry,Charlie,walk,simile
+blue,fish,mountain,morning,happy,Diana,jump,simile
+blue,frog,forest,midnight,angry,Charlie,play,simile
+yellow,bear,beach,afternoon,scared,Diana,jump,simile
+red,bear,beach,morning,happy,Evelyn,jump,simile
+white,cat,city,midnight,angry,Charlie,work,simile
+red,bear,city,morning,angry,Alice,jump,simile
+red,frog,beach,night,surprised,Evelyn,work,simile
+yellow,cat,city,afternoon,happy,Charlie,jump,simile
+yellow,fish,beach,afternoon,happy,Diana,jump,simile
+blue,bird,mountain,midnight,sad,Alice,jump,simile
+blue,bear,desert,evening,surprised,Bobby,jump,simile
+white,bear,forest,midnight,angry,Bobby,walk,simile
+red,bird,forest,evening,happy,Diana,work,simile
+white,bear,beach,midnight,angry,Evelyn,dance,simile
+blue,fish,forest,afternoon,happy,Diana,jump,simile
+red,bird,city,evening,angry,Evelyn,walk,simile
+red,cat,mountain,midnight,surprised,Charlie,work,simile
+yellow,cat,forest,afternoon,surprised,Evelyn,walk,simile
+black,bear,desert,night,angry,Alice,jump,simile
+black,frog,beach,afternoon,angry,Alice,walk,simile
+yellow,cat,desert,night,scared,Alice,work,simile
+black,cat,beach,afternoon,scared,Bobby,jump,simile
+white,fish,city,morning,surprised,Charlie,play,simile
+black,bird,forest,evening,surprised,Diana,jump,simile
+yellow,fish,mountain,night,sad,Evelyn,work,simile
+yellow,fish,forest,midnight,angry,Bobby,jump,simile
+black,cat,mountain,afternoon,happy,Charlie,walk,simile
+red,bird,forest,afternoon,sad,Charlie,jump,simile
+white,fish,forest,afternoon,angry,Evelyn,play,simile
+blue,bird,desert,midnight,scared,Evelyn,jump,simile
+white,bear,forest,morning,surprised,Bobby,jump,simile
+blue,bird,forest,night,scared,Evelyn,dance,simile
+white,frog,desert,midnight,scared,Charlie,jump,simile
+red,fish,mountain,morning,angry,Alice,walk,simile
+white,bird,forest,morning,surprised,Alice,work,simile
+blue,fish,beach,evening,angry,Evelyn,jump,simile
+yellow,bear,mountain,evening,sad,Charlie,walk,simile
+black,frog,beach,midnight,scared,Bobby,walk,simile
+red,frog,desert,midnight,sad,Charlie,walk,simile
+yellow,frog,beach,afternoon,scared,Bobby,dance,simile
+yellow,frog,forest,midnight,sad,Bobby,walk,simile
+white,fish,city,afternoon,surprised,Charlie,play,simile
+black,cat,beach,night,happy,Alice,jump,simile
+blue,frog,beach,night,sad,Evelyn,play,simile
+red,frog,desert,afternoon,happy,Evelyn,dance,simile
+red,cat,forest,evening,sad,Diana,jump,simile
+blue,cat,beach,night,sad,Bobby,play,simile
+blue,bear,forest,night,scared,Bobby,play,simile
+white,bird,beach,midnight,sad,Evelyn,jump,simile
+yellow,fish,beach,midnight,sad,Diana,play,simile
+blue,cat,forest,evening,sad,Diana,walk,simile
+yellow,fish,city,afternoon,surprised,Bobby,work,simile
+white,bear,mountain,morning,sad,Evelyn,jump,simile
+blue,cat,desert,midnight,sad,Charlie,play,simile
+black,bear,forest,night,scared,Charlie,play,simile
+white,frog,forest,morning,scared,Diana,work,simile
+black,fish,city,afternoon,sad,Bobby,dance,simile
+black,bear,city,night,scared,Bobby,jump,simile
+white,cat,beach,night,sad,Charlie,walk,simile
+blue,bird,desert,midnight,happy,Diana,jump,simile
+black,bear,city,evening,angry,Alice,work,simile
+white,cat,city,afternoon,sad,Bobby,jump,simile
+blue,bird,desert,morning,happy,Charlie,play,simile
+red,frog,mountain,afternoon,happy,Alice,work,simile
+black,cat,city,midnight,scared,Charlie,jump,simile
+black,cat,forest,evening,scared,Bobby,jump,simile
+yellow,bear,mountain,midnight,angry,Charlie,dance,hyperbole
+red,fish,desert,night,surprised,Charlie,work,hyperbole
+yellow,fish,forest,morning,surprised,Alice,dance,hyperbole
+black,frog,city,morning,scared,Charlie,work,hyperbole
+white,frog,forest,afternoon,angry,Charlie,play,hyperbole
+yellow,bird,beach,night,surprised,Charlie,jump,hyperbole
+black,bird,mountain,evening,sad,Evelyn,play,hyperbole
+white,bird,forest,afternoon,scared,Alice,walk,hyperbole
+white,bird,mountain,night,sad,Bobby,play,hyperbole
+blue,frog,mountain,afternoon,happy,Charlie,walk,hyperbole
+yellow,fish,forest,afternoon,surprised,Alice,jump,hyperbole
+yellow,frog,mountain,midnight,sad,Charlie,dance,hyperbole
+blue,fish,city,midnight,surprised,Alice,walk,hyperbole
+blue,bird,city,night,scared,Alice,work,hyperbole
+red,frog,mountain,afternoon,surprised,Diana,dance,hyperbole
+white,bird,mountain,morning,happy,Bobby,dance,hyperbole
+yellow,frog,city,evening,surprised,Alice,play,hyperbole
+white,fish,forest,afternoon,scared,Evelyn,play,hyperbole
+blue,bear,city,evening,happy,Evelyn,jump,hyperbole
+yellow,bear,city,afternoon,surprised,Alice,walk,hyperbole
+white,cat,beach,night,angry,Diana,walk,hyperbole
+blue,frog,forest,night,angry,Diana,walk,hyperbole
+blue,bird,city,afternoon,surprised,Diana,jump,hyperbole
+white,bear,city,morning,surprised,Bobby,jump,hyperbole
+black,bird,forest,afternoon,sad,Alice,dance,hyperbole
+blue,fish,desert,afternoon,surprised,Bobby,walk,hyperbole
+red,frog,city,evening,sad,Alice,play,hyperbole
+yellow,bird,desert,night,happy,Alice,jump,hyperbole
+white,cat,mountain,afternoon,happy,Diana,jump,hyperbole
+yellow,fish,forest,evening,sad,Bobby,play,hyperbole
+white,fish,desert,evening,sad,Charlie,dance,hyperbole
+yellow,cat,city,midnight,happy,Alice,walk,hyperbole
+blue,frog,forest,afternoon,happy,Diana,walk,hyperbole
+yellow,bird,mountain,morning,angry,Evelyn,work,hyperbole
+blue,fish,forest,evening,happy,Alice,dance,hyperbole
+black,cat,forest,midnight,scared,Diana,play,hyperbole
+blue,frog,beach,night,scared,Evelyn,play,hyperbole
+red,bear,desert,night,sad,Charlie,work,hyperbole
+white,frog,city,night,sad,Evelyn,work,hyperbole
+red,cat,mountain,evening,scared,Bobby,jump,hyperbole
+white,frog,city,afternoon,scared,Evelyn,dance,hyperbole
+blue,fish,desert,night,scared,Alice,play,hyperbole
+yellow,cat,mountain,night,happy,Alice,jump,hyperbole
+black,bear,city,afternoon,angry,Charlie,walk,hyperbole
+black,cat,desert,night,surprised,Bobby,walk,hyperbole
+yellow,bear,desert,night,sad,Charlie,jump,hyperbole
+red,frog,beach,evening,angry,Diana,walk,hyperbole
+red,frog,mountain,evening,angry,Diana,jump,hyperbole
+black,frog,beach,evening,sad,Evelyn,dance,hyperbole
+blue,bird,beach,evening,angry,Alice,dance,hyperbole
+black,cat,city,night,happy,Alice,play,hyperbole
+white,bear,mountain,midnight,sad,Bobby,work,hyperbole
+black,bird,beach,evening,surprised,Alice,dance,hyperbole
+white,bird,city,morning,sad,Alice,walk,hyperbole
+white,bird,desert,midnight,sad,Alice,play,hyperbole
+black,fish,city,afternoon,surprised,Diana,dance,hyperbole
+blue,frog,beach,night,happy,Evelyn,walk,hyperbole
+black,bird,beach,afternoon,surprised,Diana,play,hyperbole
+white,bear,desert,evening,scared,Diana,walk,hyperbole
+blue,frog,mountain,midnight,scared,Bobby,dance,hyperbole
+black,fish,forest,evening,sad,Alice,play,hyperbole
+black,bear,desert,midnight,surprised,Evelyn,dance,hyperbole
+black,frog,forest,night,scared,Charlie,work,hyperbole
+red,bear,city,afternoon,angry,Evelyn,play,hyperbole
+black,frog,city,night,sad,Evelyn,play,hyperbole
+white,bird,forest,morning,scared,Alice,dance,hyperbole
+red,frog,beach,morning,sad,Diana,play,hyperbole
+yellow,cat,desert,afternoon,surprised,Bobby,play,hyperbole
+white,bear,beach,midnight,sad,Charlie,play,hyperbole
+white,frog,city,evening,sad,Evelyn,jump,hyperbole
+blue,bear,beach,night,angry,Bobby,dance,hyperbole
+red,bird,city,morning,happy,Diana,play,hyperbole
+white,frog,beach,midnight,scared,Diana,work,hyperbole
+white,fish,forest,evening,surprised,Evelyn,work,hyperbole
+white,bear,city,evening,angry,Charlie,walk,hyperbole
+blue,bird,city,night,angry,Evelyn,walk,hyperbole
+red,bear,forest,night,happy,Alice,dance,hyperbole
+black,cat,desert,afternoon,sad,Bobby,work,hyperbole
+blue,frog,desert,morning,happy,Bobby,walk,hyperbole
+red,bear,city,evening,happy,Charlie,walk,hyperbole
+blue,bird,forest,night,angry,Evelyn,jump,hyperbole
+white,cat,desert,night,scared,Alice,dance,hyperbole
+yellow,fish,city,midnight,angry,Bobby,walk,hyperbole
+yellow,bear,city,morning,scared,Alice,dance,hyperbole
+black,fish,mountain,night,surprised,Bobby,walk,hyperbole
+red,frog,beach,afternoon,happy,Alice,dance,hyperbole
+black,bird,desert,afternoon,scared,Evelyn,play,hyperbole
+black,bear,mountain,afternoon,angry,Diana,walk,hyperbole
+black,bear,forest,afternoon,happy,Evelyn,play,hyperbole
+black,bear,city,midnight,happy,Diana,dance,hyperbole
+red,cat,forest,afternoon,surprised,Bobby,work,hyperbole
+white,bear,city,afternoon,happy,Alice,dance,hyperbole
+white,cat,beach,evening,happy,Bobby,jump,hyperbole
+yellow,bear,mountain,afternoon,surprised,Diana,play,hyperbole
+white,cat,mountain,evening,surprised,Charlie,work,hyperbole
+black,bird,mountain,evening,scared,Evelyn,jump,hyperbole
+yellow,fish,desert,evening,scared,Bobby,dance,hyperbole
+yellow,bird,mountain,afternoon,happy,Alice,dance,hyperbole
+white,bear,mountain,night,angry,Diana,work,hyperbole
+white,fish,city,night,happy,Charlie,walk,hyperbole
+white,bear,desert,afternoon,surprised,Charlie,work,hyperbole
+black,bird,city,midnight,surprised,Diana,walk,hyperbole
+yellow,fish,forest,afternoon,angry,Alice,walk,hyperbole
+black,bird,mountain,evening,happy,Alice,walk,hyperbole
+red,fish,beach,night,surprised,Evelyn,play,hyperbole
+blue,frog,forest,evening,happy,Diana,play,hyperbole
+white,fish,forest,evening,surprised,Bobby,jump,hyperbole
+white,bird,city,afternoon,angry,Evelyn,work,hyperbole
+blue,frog,beach,evening,sad,Alice,walk,hyperbole
+blue,bird,beach,midnight,surprised,Charlie,jump,hyperbole
+blue,cat,mountain,morning,angry,Charlie,play,hyperbole
+white,bird,forest,afternoon,surprised,Evelyn,walk,hyperbole
+yellow,frog,mountain,midnight,happy,Alice,play,hyperbole
+red,fish,forest,evening,surprised,Bobby,jump,hyperbole
+yellow,bear,city,night,angry,Charlie,play,hyperbole
+white,bird,beach,night,surprised,Charlie,walk,hyperbole
+red,frog,desert,morning,happy,Evelyn,jump,hyperbole
+yellow,bear,forest,evening,angry,Alice,walk,hyperbole
+black,cat,desert,evening,angry,Charlie,play,hyperbole
+blue,frog,forest,afternoon,sad,Diana,work,hyperbole
+white,frog,desert,night,happy,Evelyn,work,non sequitur
+black,cat,mountain,midnight,sad,Evelyn,play,non sequitur
+blue,frog,forest,afternoon,scared,Bobby,walk,non sequitur
+blue,cat,desert,midnight,happy,Evelyn,jump,non sequitur
+blue,bird,forest,afternoon,surprised,Evelyn,jump,non sequitur
+black,bird,desert,evening,scared,Diana,work,non sequitur
+red,frog,mountain,afternoon,happy,Diana,play,non sequitur
+red,cat,beach,afternoon,happy,Diana,work,non sequitur
+blue,frog,desert,morning,angry,Diana,play,non sequitur
+blue,frog,beach,midnight,scared,Diana,work,non sequitur
+red,cat,forest,evening,angry,Bobby,jump,non sequitur
+white,cat,beach,evening,sad,Evelyn,dance,non sequitur
+black,fish,city,afternoon,angry,Alice,jump,non sequitur
+white,frog,desert,afternoon,happy,Bobby,play,non sequitur
+white,cat,forest,evening,sad,Charlie,walk,non sequitur
+blue,fish,desert,afternoon,angry,Diana,work,non sequitur
+red,cat,city,night,surprised,Charlie,dance,non sequitur
+yellow,cat,beach,afternoon,surprised,Diana,walk,non sequitur
+blue,fish,mountain,evening,happy,Evelyn,work,non sequitur
+red,bird,city,evening,surprised,Alice,jump,non sequitur
+white,cat,city,evening,sad,Alice,play,non sequitur
+white,cat,desert,evening,angry,Evelyn,play,non sequitur
+yellow,fish,beach,afternoon,angry,Diana,walk,non sequitur
+red,cat,desert,evening,sad,Charlie,play,non sequitur
+white,cat,desert,evening,scared,Charlie,work,non sequitur
+yellow,frog,city,morning,angry,Charlie,play,non sequitur
+black,bear,forest,evening,happy,Evelyn,work,non sequitur
+blue,cat,mountain,morning,happy,Charlie,dance,non sequitur
+white,fish,forest,morning,scared,Diana,work,non sequitur
+blue,frog,city,midnight,angry,Bobby,walk,non sequitur
+blue,bird,desert,morning,scared,Alice,dance,non sequitur
+blue,bear,beach,morning,scared,Evelyn,work,non sequitur
+white,cat,desert,evening,scared,Bobby,jump,non sequitur
+yellow,bear,city,night,angry,Bobby,play,non sequitur
+white,bird,desert,midnight,sad,Charlie,jump,non sequitur
+white,fish,mountain,morning,angry,Alice,jump,non sequitur
+yellow,bear,desert,night,surprised,Bobby,work,non sequitur
+red,bear,city,morning,surprised,Bobby,dance,non sequitur
+yellow,frog,beach,evening,angry,Evelyn,dance,non sequitur
+black,bird,forest,morning,surprised,Diana,dance,non sequitur
+yellow,cat,desert,evening,surprised,Diana,walk,non sequitur
+red,frog,city,morning,sad,Evelyn,dance,non sequitur
+blue,frog,beach,morning,sad,Diana,work,non sequitur
+red,bird,beach,midnight,sad,Alice,work,non sequitur
+black,cat,forest,morning,scared,Bobby,dance,non sequitur
+yellow,bird,desert,afternoon,sad,Bobby,play,non sequitur
+red,bird,city,morning,angry,Charlie,play,non sequitur
+white,frog,city,night,happy,Diana,walk,non sequitur
+yellow,bird,forest,morning,scared,Diana,dance,non sequitur
+yellow,bear,forest,night,angry,Bobby,work,non sequitur
+white,frog,city,midnight,scared,Evelyn,walk,non sequitur
+red,cat,desert,evening,happy,Evelyn,work,non sequitur
+yellow,frog,forest,night,scared,Bobby,work,non sequitur
+black,fish,mountain,afternoon,scared,Diana,jump,non sequitur
+red,bear,forest,evening,sad,Bobby,play,non sequitur
+white,cat,desert,night,scared,Charlie,work,non sequitur
+yellow,frog,forest,midnight,sad,Bobby,walk,non sequitur
+black,cat,mountain,midnight,angry,Bobby,jump,non sequitur
+blue,fish,forest,afternoon,happy,Alice,play,non sequitur
+white,bear,desert,morning,angry,Diana,work,non sequitur
+white,bird,city,evening,scared,Charlie,walk,non sequitur
+red,frog,mountain,morning,angry,Bobby,play,non sequitur
+yellow,fish,beach,evening,happy,Diana,dance,non sequitur
+yellow,cat,mountain,afternoon,angry,Diana,work,non sequitur
+blue,bird,city,night,happy,Alice,dance,non sequitur
+black,fish,desert,evening,surprised,Evelyn,jump,non sequitur
+blue,frog,mountain,night,scared,Charlie,jump,non sequitur
+yellow,cat,mountain,morning,scared,Alice,work,non sequitur
+blue,bear,desert,night,happy,Diana,dance,non sequitur
+black,fish,mountain,evening,scared,Alice,work,non sequitur
+blue,bird,city,morning,surprised,Evelyn,walk,non sequitur
+red,bear,desert,night,sad,Charlie,jump,non sequitur
+yellow,bird,city,morning,happy,Bobby,dance,non sequitur
+blue,fish,forest,afternoon,sad,Evelyn,play,non sequitur
+red,frog,beach,morning,happy,Diana,dance,non sequitur
+yellow,frog,mountain,midnight,surprised,Alice,work,non sequitur
+yellow,bird,beach,midnight,angry,Evelyn,walk,non sequitur
+white,bear,city,midnight,angry,Alice,play,non sequitur
+white,bird,beach,night,sad,Diana,play,non sequitur
+black,frog,mountain,morning,surprised,Alice,work,non sequitur
+white,frog,desert,midnight,sad,Bobby,dance,non sequitur
+blue,frog,mountain,morning,happy,Evelyn,play,non sequitur
+black,bird,mountain,evening,happy,Bobby,jump,non sequitur
+red,frog,beach,night,sad,Diana,work,non sequitur
+yellow,bear,forest,evening,sad,Diana,work,non sequitur
+red,frog,city,evening,sad,Charlie,dance,non sequitur
+red,cat,city,evening,surprised,Charlie,jump,non sequitur
+blue,bird,city,evening,surprised,Bobby,work,non sequitur
+red,cat,desert,night,sad,Bobby,play,non sequitur
+blue,frog,city,night,happy,Evelyn,play,non sequitur
+white,fish,beach,midnight,scared,Diana,dance,non sequitur
+blue,bird,forest,evening,surprised,Charlie,work,non sequitur
+black,fish,forest,night,scared,Alice,dance,non sequitur
+blue,bird,forest,night,happy,Evelyn,jump,non sequitur
+red,fish,desert,morning,sad,Alice,walk,non sequitur
+red,bear,beach,night,happy,Alice,work,non sequitur
+red,bear,forest,midnight,angry,Charlie,walk,non sequitur
+white,cat,desert,morning,surprised,Charlie,jump,non sequitur
+black,cat,city,midnight,surprised,Charlie,walk,non sequitur
+yellow,bird,forest,morning,scared,Alice,play,non sequitur
+yellow,frog,beach,morning,surprised,Alice,play,non sequitur
+red,bird,city,morning,scared,Evelyn,walk,non sequitur
+yellow,fish,mountain,evening,angry,Diana,jump,non sequitur
+yellow,fish,desert,evening,happy,Alice,work,non sequitur
+white,frog,beach,morning,angry,Charlie,dance,non sequitur
+red,frog,desert,morning,scared,Diana,dance,non sequitur
+blue,cat,mountain,night,surprised,Bobby,work,non sequitur
+red,frog,forest,afternoon,angry,Bobby,jump,non sequitur
+yellow,bird,mountain,midnight,happy,Charlie,jump,non sequitur
+white,bear,desert,afternoon,angry,Bobby,work,non sequitur
+red,bird,beach,night,scared,Charlie,dance,non sequitur
+red,frog,city,afternoon,angry,Diana,walk,non sequitur
+black,bird,mountain,night,scared,Alice,dance,non sequitur
+red,cat,mountain,midnight,surprised,Diana,dance,non sequitur
+yellow,bear,mountain,evening,angry,Evelyn,play,non sequitur
+red,fish,beach,evening,happy,Alice,dance,non sequitur
+black,bird,desert,morning,angry,Evelyn,work,non sequitur
+black,fish,forest,morning,surprised,Evelyn,dance,non sequitur
+white,frog,beach,afternoon,sad,Alice,walk,non sequitur
+yellow,fish,forest,midnight,sad,Bobby,dance,non sequitur
+red,fish,beach,afternoon,surprised,Diana,jump,rhyme
+black,cat,forest,morning,sad,Bobby,walk,rhyme
+white,bird,city,evening,happy,Alice,jump,rhyme
+white,bear,mountain,night,angry,Bobby,walk,rhyme
+yellow,bear,beach,night,angry,Diana,walk,rhyme
+white,cat,desert,midnight,happy,Bobby,dance,rhyme
+blue,fish,city,night,surprised,Evelyn,jump,rhyme
+red,bear,beach,morning,sad,Alice,dance,rhyme
+white,cat,forest,evening,sad,Bobby,dance,rhyme
+blue,bear,desert,morning,scared,Charlie,jump,rhyme
+yellow,frog,forest,night,angry,Bobby,dance,rhyme
+black,fish,city,night,surprised,Bobby,work,rhyme
+yellow,cat,beach,evening,sad,Evelyn,dance,rhyme
+yellow,cat,forest,morning,surprised,Alice,jump,rhyme
+red,fish,desert,evening,happy,Evelyn,walk,rhyme
+yellow,bird,beach,morning,surprised,Evelyn,dance,rhyme
+red,bear,city,night,scared,Bobby,work,rhyme
+blue,frog,desert,morning,happy,Charlie,play,rhyme
+red,cat,beach,night,scared,Evelyn,work,rhyme
+white,bear,desert,morning,happy,Diana,walk,rhyme
+black,cat,beach,morning,sad,Diana,dance,rhyme
+yellow,bird,forest,night,angry,Evelyn,jump,rhyme
+black,bear,beach,midnight,happy,Evelyn,jump,rhyme
+black,bear,forest,midnight,sad,Charlie,walk,rhyme
+yellow,bird,mountain,morning,angry,Bobby,jump,rhyme
+blue,bear,desert,midnight,happy,Alice,walk,rhyme
+black,frog,forest,night,angry,Charlie,work,rhyme
+black,frog,beach,midnight,angry,Charlie,jump,rhyme
+blue,frog,mountain,midnight,happy,Charlie,play,rhyme
+yellow,bear,forest,morning,sad,Evelyn,dance,rhyme
+yellow,bird,beach,afternoon,happy,Evelyn,work,rhyme
+red,fish,forest,night,sad,Alice,work,rhyme
+black,bear,beach,midnight,happy,Bobby,walk,rhyme
+blue,frog,mountain,midnight,scared,Evelyn,work,rhyme
+red,frog,beach,morning,happy,Diana,play,rhyme
+red,bird,mountain,midnight,sad,Diana,jump,rhyme
+black,bird,desert,night,surprised,Diana,walk,rhyme
+white,fish,forest,afternoon,scared,Evelyn,work,rhyme
+red,cat,beach,afternoon,surprised,Charlie,dance,rhyme
+red,bear,beach,night,surprised,Charlie,walk,rhyme
+red,frog,mountain,afternoon,surprised,Bobby,jump,rhyme
+black,fish,city,midnight,surprised,Charlie,dance,rhyme
+black,frog,beach,afternoon,surprised,Diana,work,rhyme
+blue,bird,city,evening,happy,Evelyn,walk,rhyme
+black,bird,desert,evening,angry,Charlie,jump,rhyme
+white,fish,mountain,afternoon,happy,Diana,work,rhyme
+black,fish,forest,afternoon,surprised,Alice,walk,rhyme
+blue,cat,mountain,morning,happy,Diana,play,rhyme
+yellow,fish,desert,midnight,happy,Charlie,walk,rhyme
+blue,bird,forest,night,happy,Charlie,jump,rhyme
+black,bear,mountain,evening,angry,Charlie,walk,rhyme
+yellow,bird,beach,midnight,happy,Bobby,work,rhyme
+red,fish,desert,evening,scared,Evelyn,play,rhyme
+yellow,fish,city,morning,happy,Charlie,dance,rhyme
+blue,fish,mountain,afternoon,happy,Alice,work,rhyme
+black,cat,forest,night,scared,Alice,walk,rhyme
+blue,cat,desert,midnight,scared,Diana,work,rhyme
+white,bear,mountain,night,happy,Alice,jump,rhyme
+black,fish,mountain,midnight,sad,Evelyn,work,rhyme
+blue,fish,desert,afternoon,surprised,Evelyn,jump,rhyme
+red,cat,desert,afternoon,sad,Charlie,play,rhyme
+black,fish,mountain,night,surprised,Bobby,dance,rhyme
+blue,cat,mountain,evening,angry,Charlie,walk,rhyme
+yellow,bird,desert,morning,surprised,Alice,dance,rhyme
+blue,fish,mountain,evening,happy,Evelyn,dance,rhyme
+yellow,bird,city,morning,sad,Charlie,dance,rhyme
+red,bird,beach,night,surprised,Evelyn,walk,rhyme
+blue,cat,forest,night,sad,Alice,work,rhyme
+white,cat,desert,morning,surprised,Bobby,walk,rhyme
+red,fish,beach,midnight,happy,Charlie,walk,rhyme
+yellow,cat,mountain,afternoon,scared,Charlie,work,rhyme
+black,fish,city,morning,sad,Alice,walk,rhyme
+black,frog,desert,night,surprised,Bobby,dance,rhyme
+yellow,fish,forest,afternoon,scared,Alice,walk,rhyme
+black,bird,beach,morning,angry,Bobby,play,rhyme
+white,frog,desert,midnight,sad,Charlie,jump,rhyme
+yellow,fish,mountain,afternoon,sad,Bobby,dance,rhyme
+red,cat,forest,evening,happy,Charlie,play,rhyme
+blue,cat,mountain,midnight,scared,Diana,play,rhyme
+black,bird,mountain,midnight,surprised,Bobby,jump,rhyme
+white,fish,desert,morning,sad,Diana,dance,rhyme
+red,bear,forest,evening,happy,Charlie,play,rhyme
+blue,frog,mountain,evening,scared,Diana,jump,rhyme
+red,cat,beach,afternoon,scared,Charlie,dance,rhyme
+blue,cat,desert,afternoon,scared,Evelyn,dance,rhyme
+red,bear,beach,evening,surprised,Diana,play,rhyme
+yellow,fish,city,morning,scared,Alice,work,rhyme
+black,bear,beach,evening,surprised,Diana,work,rhyme
+blue,cat,desert,midnight,surprised,Charlie,walk,rhyme
+white,cat,city,morning,angry,Charlie,play,rhyme
+yellow,fish,mountain,midnight,angry,Alice,walk,rhyme
+blue,cat,beach,night,happy,Diana,work,rhyme
+white,frog,desert,midnight,sad,Bobby,work,rhyme
+yellow,fish,beach,morning,happy,Alice,play,rhyme
+yellow,cat,beach,night,sad,Diana,dance,rhyme
+yellow,frog,mountain,afternoon,scared,Charlie,walk,rhyme
+black,bird,desert,morning,angry,Alice,jump,rhyme
+yellow,fish,desert,night,angry,Diana,jump,rhyme
+red,cat,mountain,morning,sad,Evelyn,play,rhyme
+blue,bird,city,morning,angry,Evelyn,work,rhyme
+black,bear,city,midnight,angry,Diana,play,rhyme
+blue,cat,desert,morning,angry,Diana,dance,rhyme
+white,frog,mountain,morning,surprised,Evelyn,play,rhyme
+blue,bird,city,afternoon,sad,Diana,work,rhyme
+red,fish,city,evening,angry,Bobby,walk,rhyme
+black,bear,forest,midnight,scared,Diana,work,rhyme
+blue,fish,beach,evening,sad,Bobby,jump,rhyme
+blue,bear,desert,midnight,angry,Evelyn,work,rhyme
+black,bird,mountain,afternoon,scared,Bobby,dance,rhyme
+black,frog,forest,midnight,happy,Alice,dance,rhyme
+red,cat,mountain,afternoon,sad,Evelyn,jump,rhyme
+black,bear,city,evening,happy,Charlie,play,rhyme
+blue,cat,city,morning,surprised,Evelyn,dance,rhyme
+white,bear,desert,night,scared,Charlie,work,rhyme
+black,frog,city,morning,scared,Alice,dance,rhyme
+black,cat,desert,midnight,angry,Alice,walk,rhyme
+yellow,bear,beach,morning,happy,Evelyn,work,rhyme
+yellow,fish,desert,morning,happy,Bobby,jump,rhyme
+red,cat,desert,night,happy,Alice,walk,rhyme
+yellow,frog,desert,midnight,sad,Diana,work,rhyme
