@@ -88,38 +88,6 @@ const Legend = ({ stringToNumberMap, colors }) => {
 
 
 
-function trackPointer(e, { start, move, out, end }) {
-  const tracker = {},
-    id = (tracker.id = e.pointerId),
-    target = e.target;
-  tracker.point = d3.pointer(e, target);
-  target.setPointerCapture(id);
-
-  d3.select(target)
-    .on(`pointerup.${id} pointercancel.${id} lostpointercapture.${id}`, (e) => {
-      if (e.pointerId !== id) return;
-      tracker.sourceEvent = e;
-      d3.select(target).on(`.${id}`, null);
-      target.releasePointerCapture(id);
-      end && end(tracker);
-    })
-    .on(`pointermove.${id}`, (e) => {
-      if (e.pointerId !== id) return;
-      tracker.sourceEvent = e;
-      tracker.prev = tracker.point;
-      tracker.point = d3.pointer(e, target);
-      move && move(tracker);
-    })
-    .on(`pointerout.${id}`, (e) => {
-      if (e.pointerId !== id) return;
-      tracker.sourceEvent = e;
-      tracker.point = null;
-      out && out(tracker);
-    });
-
-  start && start(tracker);
-}
-
 
 
 
@@ -134,7 +102,13 @@ function Scatterplot(props) {
   const [stringToNumberMap, setStringToNumberMap] = useState({ '0': 'none' });
   // const [currentImg, setCurrentImg] = useState('')
 
+  let isZooming = false;
+  let size = 20; // Default size of images
+  let enlargedSize =size* 6
+
   useEffect(() => {
+
+
     data.forEach((d, i) => {
       d.id = i
       d.image = 'art/img_' + i + '.jpg'
@@ -142,50 +116,33 @@ function Scatterplot(props) {
     const svg = d3.select(ref.current);
     // Define zoom behavior
     const zoom = d3.zoom()
-      .scaleExtent([1, 10]) // Adjust scale extent to your needs
+      .scaleExtent([1, 10])
+      .on("start", () => {
+        isZooming = true;
+      })
       .on("zoom", (event) => {
-        // This function is called when zooming or panning
-        // Transform the group containing your visual elements
+        const currentZoom = event.transform.k; // Get current zoom level
+        // Adjust the size of the images based on the zoom level
+        const newSize = size / currentZoom**0.5;
+        enlargedSize =newSize* 6
+
         svg.selectAll('g.zoomable').attr("transform", event.transform);
-        // If you have axes, you would also update them here
+
+        svg.selectAll('image')
+           .attr('width', newSize)
+           .attr('height', newSize)
+           .attr('x', d => xScale(d[0]) - newSize / 2) // Adjust the x position based on the new size
+           .attr('y', d => yScale(d[1]) - newSize / 2); // Adjust the y position based on the new size
+      
+      })
+      .on("end", () => {
+        isZooming = false;
       });
 
     // Apply the zoom behavior to the SVG element
     svg.call(zoom);
 
 
-
-    function lasso() {
-      const dispatch = d3.dispatch("start", "lasso", "end");
-      const lasso = function (selection) {
-        const node = selection.node();
-        const polygon = [];
-
-        selection
-          .on("touchmove", e => e.preventDefault()) // prevent scrolling
-          .on("pointerdown", e => {
-            e.preventDefault();
-            trackPointer(e, {
-              start: p => {
-                polygon.length = 0;
-                dispatch.call("start", node, polygon);
-              },
-              move: p => {
-                polygon.push(p.point);
-                dispatch.call("lasso", node, polygon);
-              },
-              end: p => {
-                dispatch.call("end", node, polygon);
-              }
-            });
-          });
-      };
-      lasso.on = function (type, _) {
-        return _ ? (dispatch.on(...arguments), lasso) : dispatch.on(...arguments);
-      };
-
-      return lasso;
-    }
 
     //svg.selectAll('*').remove()
     svg.selectAll('text.label').remove()
@@ -354,8 +311,6 @@ function Scatterplot(props) {
     console.log(colorCol, stringToNumberMap)
 
 
-    let size = 20
-    let enlargedSize = size * 6
 
 
     // Create a group for visual elements that should be zoomable and panable
@@ -377,6 +332,7 @@ function Scatterplot(props) {
       .style("opacity", .6)
       // .style("z-index", 1)
       .on("mouseover", (event, d) => {
+        if (isZooming) return; // Skip if zooming
         // console.log("c", currentImg);
         // console.log("d", d.image);
         // console.log(d.image === currentImg);
