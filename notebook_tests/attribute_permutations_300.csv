@@ -1,0 +1,301 @@
+color,animal,place,time,emotion,seasons,figures_of_speech
+black,snake,lake,midnight,scared,summer,simile
+green,crocodile,desert,wee hours,angry,winter,hyperbole
+yellow,fish,park,noon,tired,fall,rhyme
+orange,bear,farm,afternoon,bored,spring,simile
+blue,dolphin,city,dawn,surprised,summer,hyperbole
+brown,bird,cave,twilight,confused,winter,rhyme
+white,cat,beach,dusk,excited,fall,simile
+red,dog,school,evening,sad,spring,hyperbole
+purple,butterfly,mountain,night,happy,summer,rhyme
+pink,frog,forest,morning,calm,winter,simile
+red,cat,forest,midnight,tired,summer,simile
+brown,frog,beach,dawn,excited,fall,rhyme
+green,bear,desert,noon,angry,spring,hyperbole
+black,butterfly,lake,afternoon,sad,winter,simile
+yellow,dolphin,park,dusk,scared,summer,rhyme
+pink,dog,city,wee hours,bored,fall,hyperbole
+white,bird,farm,morning,calm,spring,simile
+orange,crocodile,school,twilight,surprised,winter,rhyme
+purple,snake,mountain,evening,confused,summer,hyperbole
+blue,fish,cave,night,happy,fall,simile
+pink,crocodile,school,evening,confused,summer,simile
+white,fish,lake,dusk,surprised,spring,hyperbole
+red,frog,city,dawn,angry,winter,rhyme
+blue,dog,forest,afternoon,excited,fall,simile
+orange,cat,park,wee hours,bored,summer,hyperbole
+purple,bird,cave,midnight,scared,spring,rhyme
+yellow,butterfly,farm,night,sad,winter,simile
+brown,dolphin,mountain,noon,tired,fall,hyperbole
+black,bear,desert,morning,calm,summer,rhyme
+green,snake,beach,twilight,happy,spring,simile
+pink,bird,park,twilight,excited,fall,rhyme
+black,bear,farm,night,happy,spring,simile
+orange,butterfly,city,dawn,calm,summer,hyperbole
+brown,snake,desert,noon,bored,winter,rhyme
+yellow,frog,beach,afternoon,sad,fall,simile
+red,dolphin,cave,midnight,confused,spring,hyperbole
+blue,dog,mountain,evening,angry,summer,rhyme
+green,fish,forest,dusk,tired,winter,simile
+white,cat,school,morning,scared,fall,hyperbole
+purple,crocodile,lake,wee hours,surprised,spring,rhyme
+pink,bear,cave,morning,surprised,fall,rhyme
+orange,butterfly,desert,dawn,calm,spring,hyperbole
+black,bird,farm,wee hours,bored,summer,simile
+red,cat,forest,afternoon,tired,winter,rhyme
+green,dolphin,city,twilight,confused,fall,hyperbole
+yellow,frog,lake,midnight,scared,spring,simile
+purple,dog,park,night,angry,summer,rhyme
+white,crocodile,school,noon,excited,winter,hyperbole
+brown,snake,mountain,dusk,happy,fall,simile
+blue,fish,beach,evening,sad,spring,rhyme
+pink,fish,lake,afternoon,calm,summer,simile
+orange,crocodile,city,morning,scared,fall,hyperbole
+blue,frog,forest,twilight,confused,winter,rhyme
+yellow,butterfly,beach,noon,sad,spring,simile
+brown,bear,farm,dusk,angry,summer,hyperbole
+black,cat,desert,dawn,excited,fall,rhyme
+white,dolphin,cave,midnight,bored,winter,simile
+green,dog,school,night,happy,spring,hyperbole
+purple,bird,mountain,evening,surprised,summer,rhyme
+red,snake,park,wee hours,tired,fall,simile
+orange,crocodile,farm,afternoon,surprised,summer,rhyme
+brown,frog,forest,dusk,confused,spring,simile
+red,dog,lake,wee hours,calm,winter,hyperbole
+yellow,butterfly,city,evening,angry,fall,rhyme
+black,dolphin,park,noon,happy,summer,simile
+white,bird,mountain,midnight,scared,spring,hyperbole
+blue,cat,desert,night,excited,winter,rhyme
+purple,fish,beach,twilight,tired,fall,simile
+pink,snake,school,dawn,bored,summer,hyperbole
+green,bear,cave,morning,sad,spring,rhyme
+yellow,crocodile,park,wee hours,surprised,spring,rhyme
+white,dog,beach,night,tired,summer,simile
+purple,bear,farm,evening,calm,winter,hyperbole
+blue,fish,mountain,midnight,confused,fall,rhyme
+orange,butterfly,forest,morning,happy,spring,simile
+brown,dolphin,lake,noon,bored,summer,hyperbole
+green,snake,city,afternoon,sad,winter,rhyme
+pink,frog,desert,twilight,angry,fall,simile
+black,cat,school,dusk,excited,spring,hyperbole
+red,bird,cave,dawn,scared,summer,rhyme
+blue,butterfly,desert,noon,confused,winter,simile
+pink,frog,cave,dawn,sad,summer,rhyme
+purple,dolphin,beach,twilight,scared,fall,hyperbole
+brown,cat,mountain,midnight,happy,spring,simile
+green,dog,lake,evening,surprised,winter,rhyme
+yellow,crocodile,city,wee hours,bored,summer,hyperbole
+red,fish,forest,night,angry,fall,simile
+orange,bird,park,dusk,tired,spring,rhyme
+black,snake,school,afternoon,excited,winter,hyperbole
+white,bear,farm,morning,calm,summer,simile
+white,snake,beach,dawn,scared,fall,simile
+blue,cat,park,wee hours,bored,summer,rhyme
+green,crocodile,mountain,evening,tired,winter,hyperbole
+red,bear,city,noon,angry,spring,simile
+purple,dog,cave,dusk,sad,fall,rhyme
+black,bird,desert,night,happy,summer,hyperbole
+pink,fish,school,twilight,confused,winter,simile
+orange,dolphin,farm,morning,calm,spring,rhyme
+brown,frog,forest,afternoon,surprised,fall,hyperbole
+yellow,butterfly,lake,midnight,excited,summer,simile
+pink,dog,lake,evening,sad,spring,simile
+brown,bird,mountain,night,bored,winter,rhyme
+yellow,cat,desert,twilight,excited,fall,hyperbole
+orange,dolphin,city,dawn,angry,summer,simile
+purple,bear,park,morning,happy,spring,rhyme
+blue,butterfly,beach,dusk,tired,winter,hyperbole
+black,fish,forest,midnight,confused,fall,simile
+red,frog,cave,wee hours,surprised,summer,rhyme
+white,snake,farm,noon,calm,spring,hyperbole
+green,crocodile,school,afternoon,scared,winter,simile
+yellow,bird,cave,afternoon,angry,spring,rhyme
+white,snake,farm,night,confused,summer,simile
+red,butterfly,mountain,dawn,surprised,winter,hyperbole
+purple,cat,school,twilight,sad,fall,rhyme
+green,fish,lake,midnight,happy,spring,simile
+brown,crocodile,beach,wee hours,excited,summer,hyperbole
+black,frog,city,evening,bored,winter,rhyme
+blue,bear,forest,dusk,calm,fall,simile
+orange,dog,park,morning,scared,spring,hyperbole
+pink,dolphin,desert,noon,tired,summer,rhyme
+pink,snake,park,noon,excited,spring,simile
+blue,cat,beach,twilight,scared,winter,rhyme
+green,bear,lake,evening,calm,fall,hyperbole
+black,dog,mountain,dusk,confused,summer,simile
+yellow,frog,forest,night,sad,spring,rhyme
+orange,fish,cave,midnight,angry,winter,hyperbole
+red,butterfly,city,morning,tired,fall,simile
+white,crocodile,desert,afternoon,happy,summer,rhyme
+purple,dolphin,farm,dawn,surprised,spring,hyperbole
+brown,bird,school,wee hours,bored,winter,simile
+pink,frog,mountain,afternoon,happy,spring,simile
+white,butterfly,park,dusk,angry,fall,hyperbole
+blue,snake,cave,wee hours,calm,winter,rhyme
+purple,dog,city,noon,confused,summer,simile
+red,cat,school,dawn,bored,spring,hyperbole
+brown,fish,desert,morning,tired,fall,rhyme
+green,bird,lake,night,sad,winter,simile
+yellow,dolphin,beach,evening,excited,summer,hyperbole
+black,bear,forest,twilight,scared,spring,rhyme
+orange,crocodile,farm,midnight,surprised,fall,simile
+orange,frog,mountain,dawn,bored,fall,hyperbole
+purple,dog,forest,midnight,surprised,summer,rhyme
+black,crocodile,school,morning,calm,winter,simile
+yellow,butterfly,lake,noon,excited,spring,hyperbole
+white,dolphin,cave,evening,scared,fall,rhyme
+green,fish,beach,night,sad,summer,simile
+brown,cat,park,wee hours,confused,winter,hyperbole
+red,bird,desert,twilight,happy,spring,rhyme
+blue,snake,farm,dusk,angry,fall,simile
+pink,bear,city,afternoon,tired,summer,hyperbole
+yellow,dolphin,lake,morning,tired,summer,simile
+blue,snake,mountain,wee hours,confused,fall,rhyme
+brown,frog,city,twilight,calm,winter,hyperbole
+green,dog,beach,night,sad,spring,simile
+orange,bear,park,noon,surprised,summer,rhyme
+red,butterfly,farm,evening,bored,fall,hyperbole
+black,bird,desert,dusk,scared,winter,simile
+pink,cat,school,midnight,angry,spring,rhyme
+purple,fish,cave,afternoon,happy,summer,hyperbole
+white,crocodile,forest,dawn,excited,fall,simile
+yellow,frog,school,wee hours,sad,winter,rhyme
+orange,dolphin,lake,twilight,excited,fall,hyperbole
+purple,dog,desert,morning,calm,spring,simile
+pink,crocodile,farm,afternoon,surprised,summer,rhyme
+green,fish,beach,dawn,confused,winter,hyperbole
+red,bird,forest,evening,tired,fall,simile
+black,snake,park,noon,angry,spring,rhyme
+brown,butterfly,mountain,night,bored,summer,hyperbole
+white,bear,cave,midnight,happy,winter,simile
+blue,cat,city,dusk,scared,fall,rhyme
+green,snake,lake,dawn,calm,fall,simile
+white,dog,school,evening,tired,winter,hyperbole
+yellow,crocodile,forest,morning,surprised,summer,rhyme
+pink,butterfly,city,midnight,angry,spring,simile
+brown,bird,beach,wee hours,scared,fall,hyperbole
+blue,frog,farm,dusk,happy,winter,rhyme
+black,bear,desert,noon,sad,summer,simile
+orange,cat,mountain,night,bored,spring,hyperbole
+red,fish,park,afternoon,confused,fall,rhyme
+purple,dolphin,cave,twilight,excited,winter,simile
+brown,frog,forest,night,calm,spring,rhyme
+red,dog,park,dusk,angry,summer,hyperbole
+yellow,bear,lake,noon,confused,fall,simile
+orange,snake,school,afternoon,surprised,winter,rhyme
+white,fish,mountain,midnight,scared,spring,hyperbole
+blue,crocodile,desert,twilight,sad,summer,simile
+purple,bird,city,dawn,tired,fall,rhyme
+black,cat,farm,evening,bored,winter,hyperbole
+pink,butterfly,beach,wee hours,happy,spring,simile
+green,dolphin,cave,morning,excited,summer,rhyme
+black,bear,mountain,midnight,confused,fall,hyperbole
+purple,frog,city,afternoon,sad,summer,rhyme
+pink,butterfly,lake,dawn,calm,winter,simile
+yellow,dog,school,dusk,happy,spring,hyperbole
+brown,cat,park,night,scared,fall,rhyme
+blue,fish,desert,wee hours,surprised,summer,simile
+orange,dolphin,beach,twilight,excited,winter,hyperbole
+green,bird,forest,evening,angry,spring,rhyme
+white,crocodile,farm,noon,bored,fall,simile
+red,snake,cave,morning,tired,summer,hyperbole
+white,cat,beach,night,calm,winter,simile
+green,dolphin,forest,twilight,excited,fall,hyperbole
+orange,dog,school,dawn,scared,spring,rhyme
+blue,butterfly,mountain,wee hours,happy,summer,simile
+black,frog,park,evening,sad,winter,hyperbole
+pink,snake,cave,noon,surprised,fall,rhyme
+red,bear,city,afternoon,angry,spring,simile
+brown,bird,farm,midnight,confused,summer,hyperbole
+yellow,crocodile,desert,dusk,tired,winter,rhyme
+purple,fish,lake,morning,bored,fall,simile
+black,dog,beach,wee hours,happy,summer,rhyme
+orange,frog,lake,morning,confused,fall,hyperbole
+purple,snake,farm,dawn,sad,winter,simile
+white,butterfly,school,dusk,tired,spring,rhyme
+red,cat,city,twilight,calm,summer,hyperbole
+brown,crocodile,cave,night,angry,fall,simile
+yellow,fish,forest,afternoon,scared,winter,rhyme
+green,dolphin,park,noon,bored,spring,hyperbole
+pink,bird,desert,midnight,excited,summer,simile
+blue,bear,mountain,evening,surprised,fall,rhyme
+black,bird,beach,night,bored,summer,simile
+white,fish,desert,evening,sad,winter,rhyme
+green,bear,farm,afternoon,excited,spring,hyperbole
+pink,cat,park,dawn,tired,fall,simile
+purple,frog,school,morning,angry,summer,rhyme
+blue,dolphin,city,midnight,scared,winter,hyperbole
+orange,snake,cave,wee hours,happy,spring,simile
+brown,dog,forest,noon,calm,fall,rhyme
+red,crocodile,lake,dusk,surprised,summer,hyperbole
+yellow,butterfly,mountain,twilight,confused,winter,simile
+blue,dog,farm,midnight,surprised,fall,simile
+brown,fish,city,dawn,sad,spring,rhyme
+orange,snake,beach,wee hours,bored,winter,hyperbole
+white,bear,mountain,evening,excited,summer,simile
+purple,bird,school,afternoon,tired,fall,rhyme
+black,cat,lake,dusk,angry,spring,hyperbole
+yellow,dolphin,forest,night,happy,winter,simile
+green,crocodile,cave,noon,calm,summer,rhyme
+pink,frog,park,morning,confused,fall,hyperbole
+red,butterfly,desert,twilight,scared,spring,simile
+orange,snake,cave,afternoon,surprised,summer,simile
+green,fish,forest,dusk,tired,spring,rhyme
+yellow,bird,desert,midnight,sad,fall,hyperbole
+pink,dog,lake,evening,confused,winter,simile
+red,cat,city,night,scared,summer,rhyme
+white,butterfly,farm,morning,excited,spring,hyperbole
+black,frog,beach,dawn,calm,fall,simile
+brown,dolphin,mountain,wee hours,happy,winter,rhyme
+purple,crocodile,park,twilight,angry,summer,hyperbole
+blue,bear,school,noon,bored,spring,simile
+orange,snake,farm,dusk,sad,summer,rhyme
+purple,bear,forest,morning,calm,winter,simile
+brown,butterfly,beach,noon,excited,fall,hyperbole
+yellow,dolphin,desert,dawn,bored,spring,rhyme
+black,bird,lake,afternoon,happy,summer,simile
+blue,dog,city,midnight,confused,winter,hyperbole
+pink,fish,park,wee hours,angry,fall,rhyme
+white,cat,mountain,evening,scared,spring,simile
+red,frog,school,night,surprised,summer,hyperbole
+green,crocodile,cave,twilight,tired,winter,rhyme
+orange,dolphin,desert,dusk,scared,winter,hyperbole
+white,fish,city,twilight,sad,summer,rhyme
+red,snake,lake,night,angry,spring,simile
+black,bear,school,wee hours,happy,fall,hyperbole
+blue,bird,forest,evening,surprised,winter,rhyme
+green,cat,park,noon,bored,summer,simile
+brown,crocodile,beach,morning,calm,spring,hyperbole
+yellow,frog,mountain,afternoon,confused,fall,rhyme
+purple,butterfly,farm,dawn,tired,winter,simile
+pink,dog,cave,midnight,excited,summer,hyperbole
+white,cat,park,afternoon,angry,spring,simile
+blue,crocodile,farm,midnight,surprised,winter,rhyme
+pink,bear,beach,dusk,confused,fall,hyperbole
+purple,butterfly,desert,twilight,scared,summer,simile
+orange,fish,mountain,noon,happy,spring,rhyme
+green,dog,cave,night,calm,winter,hyperbole
+yellow,bird,forest,dawn,tired,fall,simile
+red,dolphin,lake,morning,sad,summer,rhyme
+brown,frog,city,evening,bored,spring,hyperbole
+black,snake,school,wee hours,excited,winter,simile
+purple,butterfly,city,evening,tired,winter,simile
+orange,crocodile,farm,midnight,sad,fall,hyperbole
+red,bear,school,morning,calm,spring,rhyme
+yellow,frog,park,noon,surprised,summer,simile
+green,cat,forest,night,happy,winter,hyperbole
+pink,fish,lake,dusk,angry,fall,rhyme
+black,bird,beach,wee hours,confused,spring,simile
+brown,dolphin,mountain,dawn,bored,summer,hyperbole
+blue,dog,desert,twilight,excited,winter,rhyme
+white,snake,cave,afternoon,scared,fall,simile
+purple,dolphin,farm,dusk,confused,spring,simile
+brown,cat,beach,midnight,calm,winter,hyperbole
+red,butterfly,cave,twilight,sad,summer,rhyme
+pink,fish,park,morning,angry,fall,simile
+blue,dog,desert,wee hours,scared,spring,hyperbole
+yellow,snake,mountain,night,excited,winter,rhyme
+green,bird,school,noon,tired,summer,simile
+orange,frog,forest,dawn,bored,fall,hyperbole
+white,crocodile,lake,afternoon,surprised,spring,rhyme
+black,bear,city,evening,happy,winter,simile

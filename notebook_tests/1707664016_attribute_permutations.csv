@@ -1,0 +1,26 @@
+color,animal,place,time,figures_of_speech
+blue,bear,city,night,rhyme
+red,bird,desert,midnight,hyperbole
+white,fish,beach,morning,non sequitur
+yellow,cat,forest,afternoon,simile
+black,frog,mountain,evening,rhyme
+black,cat,mountain,afternoon,hyperbole
+blue,bear,forest,night,rhyme
+yellow,frog,desert,morning,simile
+red,bird,beach,evening,non sequitur
+white,fish,city,midnight,hyperbole
+black,fish,forest,evening,simile
+white,bear,desert,afternoon,rhyme
+blue,frog,beach,night,hyperbole
+red,bird,city,midnight,non sequitur
+yellow,cat,mountain,morning,simile
+white,fish,desert,night,simile
+red,frog,city,evening,hyperbole
+black,bird,mountain,midnight,non sequitur
+yellow,cat,forest,afternoon,rhyme
+blue,bear,beach,morning,simile
+white,bear,forest,night,rhyme
+red,frog,city,evening,simile
+yellow,bird,desert,morning,hyperbole
+black,cat,mountain,afternoon,non sequitur
+blue,fish,beach,midnight,rhyme

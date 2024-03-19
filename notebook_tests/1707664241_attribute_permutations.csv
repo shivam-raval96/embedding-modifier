@@ -1,0 +1,26 @@
+color,animal,place,time,emotion,names,action,object,seasons,figures_of_speech
+black,bird,city,night,happy,Diana,dance,tree,summer,hyperbole
+white,cat,forest,afternoon,scared,Alice,walk,rock,fall,simile
+red,frog,mountain,evening,surprised,Evelyn,work,shoe,spring,non sequitur
+yellow,fish,beach,midnight,angry,Bobby,play,ball,winter,rhyme
+blue,bear,desert,morning,sad,Charlie,jump,car,summer,hyperbole
+blue,fish,mountain,afternoon,angry,Evelyn,jump,rock,spring,rhyme
+black,bird,city,morning,scared,Bobby,walk,car,fall,hyperbole
+red,cat,forest,midnight,sad,Diana,work,shoe,summer,non sequitur
+yellow,bear,beach,night,surprised,Alice,play,ball,winter,simile
+white,frog,desert,evening,happy,Charlie,dance,tree,spring,rhyme
+blue,cat,city,morning,sad,Bobby,work,tree,winter,non sequitur
+black,frog,desert,midnight,surprised,Charlie,jump,shoe,summer,simile
+white,bear,mountain,night,angry,Diana,play,car,spring,rhyme
+yellow,fish,beach,afternoon,happy,Evelyn,dance,rock,fall,hyperbole
+red,bird,forest,evening,scared,Alice,walk,ball,winter,non sequitur
+red,bird,mountain,afternoon,scared,Evelyn,dance,tree,spring,hyperbole
+black,fish,beach,evening,happy,Bobby,jump,shoe,winter,rhyme
+white,cat,desert,morning,angry,Diana,play,car,fall,simile
+yellow,bear,city,midnight,surprised,Alice,work,rock,summer,non sequitur
+blue,frog,forest,night,sad,Charlie,walk,ball,spring,hyperbole
+white,cat,forest,morning,scared,Charlie,work,car,winter,simile
+yellow,bear,mountain,evening,sad,Bobby,walk,ball,fall,rhyme
+blue,frog,desert,afternoon,happy,Evelyn,jump,tree,summer,non sequitur
+red,bird,city,night,surprised,Diana,dance,rock,spring,hyperbole
+black,fish,beach,midnight,angry,Alice,play,shoe,winter,simile
