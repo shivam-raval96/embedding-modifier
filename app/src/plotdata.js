@@ -559,7 +559,7 @@ function Scatterplot(props) {
 
   return (
     <>
-    <div style={{ position: 'fixed', top: '1%', left: '82%', backgroundColor: 'rgba(0, 0, 0, 0.02)',
+    <div style={{ position: 'fixed', top: '30px', left: '50%', backgroundColor: 'rgba(0, 0, 0, 0.02)',
                  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
                 borderRadius: '40px' ,                         // Curved edges
                 fontFamily: 'Arial, sans-serif',
@@ -579,7 +579,6 @@ function Scatterplot(props) {
 
     /></div>
         <svg ref={ref} width={width} height={height}></svg>
-;
     </>
   )
 }

@@ -1,9 +1,9 @@
 import './App.css';
-import {useState } from 'react';
+import { useState } from 'react';
 import axios from "axios";
 import CancelIcon from '@mui/icons-material/Cancel';
 import IconButton from '@mui/material/IconButton';
-import Scatterplot  from './plotdata'
+import Scatterplot from './plotdata'
 import ScatterplotImg from './plotdataImg';
 import data from './datasets/relatedworks_.json'
 //import data_labels from './datasets/data2__labels.json'
@@ -17,7 +17,7 @@ const r_big = 15
 
 
 const localDevURL = "http://127.0.0.1:8000/";
-axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 
@@ -49,94 +49,95 @@ function App() {
 
 
   var [theme, setTheme] = useState('');
-  const [preset, setPreset] = useState(['','colors','animals','places','emotions', 'time_of_day', 'characters', 'actions','literary_styles']);
+  const [preset, setPreset] = useState(['', 'colors', 'animals', 'places', 'emotions', 'time_of_day', 'characters', 'actions', 'literary_styles']);
 
- const colorColCode={ colors:4, animals:5, places: 6, time_of_day:7, emotions: 8, characters: 9, actions: 10, literary_styles:11}
+  const colorColCode = { colors: 4, animals: 5, places: 6, time_of_day: 7, emotions: 8, characters: 9, actions: 10, literary_styles: 11 }
 
   const loadData = (dataset) => {
 
     try {
       //var data_labels2= require('./datasets/'+dataset+'_'+theme+'_labels.json')
-      var data2= require('./datasets/'+dataset+'_'+theme+'.json');
-  
-  
+      var data2 = require('./datasets/' + dataset + '_' + theme + '.json');
+
+
       setPlottedData(data2)
       //setLabelData(data_labels2)
-      if (theme!=''){
-        setColorCol(colorColCode[theme])}
+      if (theme != '') {
+        setColorCol(colorColCode[theme])
+      }
       setLoading(false)
-  
-     }
-     catch (e) {
+
+    }
+    catch (e) {
       console.log(e)
       setLoading(false)
       /*alert('Oops: Not Allowed')
       setDataset('small')
       setDR('umap')
       setClusterBy('content')*/
-     }
+    }
   }
 
   const handleFileChange = (event) => {
-      const file = event.target.files[0];
-      if (file) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-              try {
-                  const json = JSON.parse(e.target.result);
-                  setPlottedData(json)
-              } catch (error) {
-                  alert('Invalid JSON file');
-              }
-          };
-          reader.readAsText(file);
-      }
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const json = JSON.parse(e.target.result);
+          setPlottedData(json)
+        } catch (error) {
+          alert('Invalid JSON file');
+        }
+      };
+      reader.readAsText(file);
+    }
   };
 
   const handleUpload = (event) => {
     const fileReader = new FileReader();
     fileReader.readAsText(event.target.files[0], "UTF-8");
-  
+
     fileReader.onload = e => {
       try {
         const parsedData = JSON.parse(e.target.result);
-  
+
         setPlottedData(parsedData)
-  
+
       } catch (error) {
         console.error("Error parsing JSON:", error);
         alert("Error parsing JSON. Please check the file format.");
       }
     };
-  
+
     fileReader.onerror = e => {
       console.error("File reading error:", e);
       alert("Failed to read file. Please try again.");
     };
   };
-  
+
 
   const handleDownload = () => {
-      if (plottedData) {
-          var blob = new Blob([JSON.stringify(plottedData, null, 2)], { type: 'application/json' });
-          var link = document.createElement('a');
-          link.href = URL.createObjectURL(blob);
-          link.download = dataset+'_'+theme+'.json';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+    if (plottedData) {
+      var blob = new Blob([JSON.stringify(plottedData, null, 2)], { type: 'application/json' });
+      var link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = dataset + '_' + theme + '.json';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
-          blob = new Blob([JSON.stringify(labelData, null, 2)], { type: 'application/json' });
-          link.href = URL.createObjectURL(blob);
-          link.download = dataset+'_'+theme+'_labels.json';
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+      blob = new Blob([JSON.stringify(labelData, null, 2)], { type: 'application/json' });
+      link.href = URL.createObjectURL(blob);
+      link.download = dataset + '_' + theme + '_labels.json';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
 
-      } else {
-          alert('No JSON data to download');
-      }
+    } else {
+      alert('No JSON data to download');
+    }
   };
 
 
@@ -144,137 +145,102 @@ function App() {
     setLoading(true);
     setProgress(0)
     const req = {
-        dataset: dataset,
-        theme: theme,
-        batchsize: batchSize,
+      dataset: dataset,
+      theme: theme,
+      batchsize: batchSize,
     };
 
-    if (!preset.includes(theme)){
-    axios.post('http://127.0.0.1:8000/initialize-embeddings', req)
-    .then((response) => {
-        console.log(response.data);
-        const sessionId = response.data.session_id;
-        listenForUpdates(sessionId); // Pass the session ID to the SSE connection function
-    })
-    .catch((error) => {
-        console.error("Error initializing processing:", error);
-        setLoading(false);
-    });
-  }else{
+    if (!preset.includes(theme)) {
+      axios.post('http://127.0.0.1:8000/initialize-embeddings', req)
+        .then((response) => {
+          console.log(response.data);
+          const sessionId = response.data.session_id;
+          listenForUpdates(sessionId); // Pass the session ID to the SSE connection function
+        })
+        .catch((error) => {
+          console.error("Error initializing processing:", error);
+          setLoading(false);
+        });
+    } else {
 
-    loadData(dataset)
-    
-    
-  }
-  
-};
+      loadData(dataset)
 
-function listenForUpdates(sessionId) {
-  // Adjust the URL to include the session ID as a query parameter
-  const eventSource = new EventSource(`http://127.0.0.1:8000/modify-embeddings/?session_id=${sessionId}`);
 
-  eventSource.onmessage = function(event) {
+    }
+
+  };
+
+  function listenForUpdates(sessionId) {
+    // Adjust the URL to include the session ID as a query parameter
+    const eventSource = new EventSource(`http://127.0.0.1:8000/modify-embeddings/?session_id=${sessionId}`);
+
+    eventSource.onmessage = function (event) {
       //console.log('Received update:', event.data);
-        //setLabelData(response.data.labels )
+      //setLabelData(response.data.labels )
 
       const data = JSON.parse(event.data);
-      setProgress(parseInt(data.update*100))
-      if (data.embeddings!='none'){
+      setProgress(parseInt(data.update * 100))
+      if (data.embeddings != 'none') {
         setPlottedData(data.embeddings)
         //setLabelData(data.labels)
         setMapping(data.mapping)
       }
-      
+
 
 
       if (data.status && data.status === "Completed") {
-          console.log(data.message);
-          eventSource.close();
-          setProgress(100)
-          setLoading(false);
+        console.log(data.message);
+        eventSource.close();
+        setProgress(100)
+        setLoading(false);
 
       }
-  };
+    };
 
-  eventSource.onerror = function(error) {
+    eventSource.onerror = function (error) {
       console.log('Error receiving updates:', error);
       eventSource.close();
       setProgress(0)
       setLoading(false);
 
-  };
-}
+    };
+  }
 
-function handleCancel() {
-  setProgress(100)
-  axios.post('http://127.0.0.1:8000/stop-processing')
-  .then((response) => {
-      console.log(response.data);
-      // Handle any UI changes needed after stopping the process
-  })
-  .catch((error) => {
-      console.error("Error stopping processing:", error);
-     
+  function handleCancel() {
+    setProgress(100)
+    axios.post('http://127.0.0.1:8000/stop-processing')
+      .then((response) => {
+        console.log(response.data);
+        // Handle any UI changes needed after stopping the process
+      })
+      .catch((error) => {
+        console.error("Error stopping processing:", error);
 
-  });
-}
+
+      });
+  }
+
   const Legend = ({ stringToNumberMap, colors }) => {
     // Convert the object to an array of its values (names) for existing legend items
     const labels = Object.values(stringToNumberMap);
-  
+
     return (
-  <div style={{
-        padding: '10px',
-        border: '1px solid #ccc',
-        borderRadius: '5px',
-        backgroundColor: '#fff',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-        fontFamily: 'Arial, sans-serif',
-        fontSize: '20px',
-        overflowY: 'scroll',
-      }}>
-        <h3 style={{ textAlign: 'left' }}>Legend</h3>
+      <div id="legend">
+        <h3>Legend</h3>
         {labels.map((name, index) => (
-          <div key={index} style={{
-            display: 'flex', // Use flexbox for alignment
-            alignItems: 'center', // Center items vertically
-            marginBottom: '4px',
-          }}>
-            <span style={{
-              display: 'inline-block',
-              width: '20px',
-              height: '20px',
-              borderRadius: '50%',
-              backgroundColor: colors[index % colors.length],
-              marginRight: '10px', // Add some space between the circle and the text
-            }}></span>
-            <span style={{ flex: '1' }}>{name}</span> {/* This ensures the text takes the remaining space */}
+          <div key={index} className='entry'>
+            <span style={{backgroundColor: colors[index % colors.length]}}/>
+            <span>{name}</span>
           </div>
         ))}
         {/* Manually add the "not detected" and "not analysed" entries */}
-        <div style={{ display: 'flex', alignItems: 'left', marginBottom: '4px' }}>
-          <span style={{
-            display: 'inline-block',
-            width: '20px',
-            height: '20px',
-            borderRadius: '50%',
-            backgroundColor: '#808080', // Specific color for "not detected"
-            marginRight: '10px',
-          }}></span>
+        <div className='entry'>
+          <span style={{backgroundColor: '#808080'}}></span>
           <span>None</span>
-          <br/><br/>
         </div>
-        <div style={{ display: 'flex', alignItems: 'left', marginBottom: '4px' }}>
-          <span style={{
-            display: 'inline-block',
-            width: '20px',
-            height: '20px',
-            borderRadius: '50%',
-            backgroundColor: '#F9F6EE', // Specific color for "not analysed"
-            marginRight: '10px',
-          }}></span>
+        <div className='entry'>
+          <span style={{backgroundColor: '#F9F6EE'}}></span>
           <span>Unprocessed</span>
-          <br/><br/>
         </div>
       </div>
     );
@@ -282,7 +248,7 @@ function handleCancel() {
 
   const getSortedData = () => {
     if (!sortConfig.key) return plottedData;
-  
+
     const sortedData = [...plottedData].sort((a, b) => {
       if (a[sortConfig.key] < b[sortConfig.key]) {
         return sortConfig.direction === 'ascending' ? -1 : 1;
@@ -292,7 +258,7 @@ function handleCancel() {
       }
       return 0;
     });
-  
+
     return sortedData;
   };
 
@@ -305,8 +271,7 @@ function handleCancel() {
     }
     setSortConfig({ key, direction });
   };
-  
-  
+
   const handleAttributeChange = (index, newValue) => {
     // Create a new array with all items but replace the item at the given index with a new object
     const newData = plottedData.map((item, i) => {
@@ -318,32 +283,32 @@ function handleCancel() {
       }
       return item;
     });
-  
+
     // Update the plottedData state with the new array
     setPlottedData(newData);
   };
-  
+
   // Function to generate table rows from plottedData
   const generateTableRows = (data) => {
     return data.map((entry, index) => (
-      <tr key={index} style={{cursor: 'context-menu'}}
+      <tr key={index} style={{ cursor: 'context-menu' }}
         onMouseEnter={() => {
           setHoveredRowIndex(index);
-          d3.selectAll('circle').transition(100).attr("r", function(d) {
+          d3.selectAll('circle').transition(100).attr("r", function (d) {
             var dIsInSubset = d.id == entry.id;
             return dIsInSubset ? 15 : 5
           })
         }}
         onMouseLeave={() => setHoveredRowIndex(null)}>
         <td>{index + 1}</td>
-        <td>{entry[2].slice(0,300)}</td>
+        <td>{entry[2].slice(0, 300)}</td>
         <td>
           {/* Make this column editable */}
-          <input 
-            type="text" 
-            value={entry[5]} 
+          <input
+            type="text"
+            value={entry[5]}
             onChange={(e) => handleAttributeChange(index, e.target.value)}
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
           />
         </td>
       </tr>
@@ -352,176 +317,131 @@ function handleCancel() {
 
   return (
     <div className="App">
-      
-      <div style={{ position: 'fixed', top: 20, left: 20, width: '300px', height:'450px', backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
-                borderRadius: '20px' ,                         // Curved edges
-                fontFamily: 'Arial, sans-serif',
 
-            }}>
+      <div className="container">
+        <div id="controls">
+          <h3>Text Reprojector</h3>
 
-        
-        <h2>Text Reprojector</h2>
-
-       Dataset: <select 
-        value={dataset} 
-        onChange={e => {setDataset(e.target.value);theme='';setTheme('');console.log(e.target.value);loadData(e.target.value)}}
-        style={{ width: '40%', padding: '5px', borderRadius: '5px' }}>
-        <option value="8attrLarge">Synth200</option>
-        <option value="poems">Poems</option>
-        <option value="relatedworks">Related Works</option>
-
-        <option value="papers">Papers</option>
-        <option value="greatgatsby">Great Gatsby</option>
-
-      </select>
-      <br/> <br/> 
-      Color by: &nbsp;
-         <select 
-        value={colorCol} 
-        onChange={e => {setColorCol(e.target.value)}}
-        style={{ width: '37%', padding: '5px', borderRadius: '5px' }}>
-        <option value="-1">GPT Clusters</option>
-
-        <option value="4">Colors</option>
-        <option value="5">Animals</option>
-
-        <option value="6">Places</option>
-
-        <option value="7">Time</option>
-        <option value="8">Emotion</option>
-        <option value="9">Characters</option>
-        <option value="10">Actions</option>
-        <option value="11">Lit Style</option>
-
-      </select>
-      
-      <br/><br/> 
-
-  
-       <label for="theme-choice"><b>Reprojection attribute description:</b> </label><br/>
-        <input list="theme-options" id="theme-choice" name="theme-choice" type="search"
-
-        style={{
-        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
-       borderRadius: '20px' ,                         // Curved edges
-       fontFamily: 'Arial, sans-serif',
-       overflowY: 'scroll',
-       padding: '10px',
-       fontSize: '16px', // Larger font size for better readability
-       border: '2px solid #007bff', // Solid border with a color
-       borderRadius: '10px', // Rounded corners
-       color: '#495057', // Text color
-       margin: '10px 0', // Margin to space out elements
-       transition: 'border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out', // Smooth transition for focus
-       
-       }}
-
-        onFocus={(e) => {
-                e.target.style.borderColor = '#0056b3'; // Darker border on focus
-                e.target.style.boxShadow = '0 0 0 0.2rem rgba(0, 123, 255, 0.5)'; // Glow effect on focus
-              }}
-        onBlur={(e) => {
-                e.target.style.borderColor = '#007bff'; // Revert border color on blur
-                e.target.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.5)'; // Revert box shadow on blur
-              }}
-                value={theme}
-                    onChange={e => {setTheme(e.target.value)}}
-                    />
-
-        <datalist id="theme-options">
-          <option value="colors"></option>
-          <option value="animals"></option>
-          <option value="places"></option>
-          <option value="emotions"></option>
-          <option value="time_of_day"></option>
-          <option value="characters"></option>
-          <option value="actions"></option>
-          <option value="literary_styles"></option>
-        </datalist>
-         
-        <button  style={{ margin:"15px", padding: '10px',fontSize: '15px', borderRadius: '10px'}}onClick={handleSend}>Transform</button>
-        <input  id="batchsize" name="batchsize" value={batchSize} style={{ margin:"10px", padding: '10px',fontSize: '15px', width:"50px",borderRadius: '10px'}}onChange={e => {setBatchSize(e.target.value)}}type="number"/>
-        <div style={{ padding: '10px',fontSize: '15px'}}>
-        <Progress percent={progress} />
-
-        </div>
-
-         <IconButton aria-label="send">
-
-            {(loading)?<CancelIcon size="1.5rem" variant="determinate" color="inherit" style={{}}onClick={handleCancel}/>:null}
-         
-       </IconButton>
-
-            <button  style={{margin:"15px", padding: '10px',fontSize: '13px', borderRadius: '10px',cursor: 'pointer'}}onClick={handleDownload}>Save View</button>
-            <input type="file" id="upload" style={{display: "none"}} accept=".json" onChange={handleUpload} />
-            <label htmlFor="upload" style={{margin:"15px", padding: '10px',fontSize: '13px', borderRadius: '10px',border:'2px solid black',cursor: 'pointer'}}>Load View</label>
-
-
-
-        <p style={{ paddingLeft: "15px",paddingRight: "15px", display:'none'}} align="left" >Each point is an embedded text. Visual clusters are identified by a clustering algorithm. <br /><br />
-      This clustering may not be optimal for your task. You can change this!<br /><br />
-        This view may not reflect the actual clustering in high dimensions. 
-        
-        </p>
-        
-        <div style={{display:'none'}}>
-        <label id="name"><h4 style={{ paddingLeft: "15px",paddingTop: "0px"}} align="left">Load Projection</h4> </label>
-        <input  type="file" accept=".json" onChange={handleFileChange} id="name" name="name" style={{ position:"relative", top: "-15px", left: "-10px"}} align="left" />
-        <br />
-        </div>
-   
-        </div>
-
-        <div style={{ position: 'fixed', top: '0%', left: "25%",}}>
-            <Scatterplot data={plottedData} labels ={labelData} colorCol ={colorCol} hoveredIndexTable={hoveredRowIndex} width={800} height={600} />
-
-        </div>
-
-
-        <div style={{ position: 'fixed', top: '50%', left: 20, width: '300px', height:'500px', backgroundColor: 'rgba(0, 0, 0, 0.02)',
-                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
-                borderRadius: '20px' ,                         // Curved edges
-                fontFamily: 'Arial, sans-serif',
-                overflowY: 'scroll'// <Scatterplot data={plottedData} labels ={labelData} colorCol ={colorCol} jitter = {jitter} width={1000} height={800} />
-
-                
-
-            }}><h3>Selection</h3>
-            <div id = "selectioncontent" style={{ padding:'5px', }} ></div>
-              <table>
-                <tbody id="myTable">
-
-                </tbody>
-              </table>
-            </div>
-
-            <div id = 'legend' style={{ position: 'fixed', top: '6%', left: '82%',
-            maxwidth:'300px', 
-                }}>
-        
-            <Legend stringToNumberMap={mapping} colors={colors} />
-
-            
-            </div>
-
-            {/* New div for showing the data table */}
-          <div style={{ position: 'fixed', top: '60%', left:"20%", width: '70%', height: '400px', backgroundColor: 'rgba(255, 255, 255, 0.9)', overflowY: 'auto', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', borderRadius: '10px' }}>
-            <h3 style={{ textAlign: 'center' }}>Projected Data</h3>
-            <table style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th style={{cursor: 'ns-resize'}}onClick={() => requestSort(2)}>Text</th>
-                  <th style={{cursor: 'ns-resize'}}onClick={() => requestSort(3)}>{theme}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {generateTableRows(getSortedData())}
-              </tbody>
-            </table>
+          <div className="dropdown">
+            <span>Dataset:</span> 
+            <select
+              value={dataset}
+              // Stringing along multiple lines in this is terrible practice, this should be a function
+              onChange={e => { setDataset(e.target.value); theme = ''; setTheme(''); loadData(e.target.value) }}
+            >
+              <option value="8attrLarge">Synth200</option>
+              <option value="poems">Poems</option>
+              <option value="relatedworks">Related Works</option>
+              <option value="papers">Papers</option>
+              <option value="greatgatsby">Great Gatsby</option>
+            </select>
           </div>
 
+          <div className="dropdown">
+            <span>Color by:</span>
+            <select
+              value={colorCol}
+              onChange={e => { setColorCol(e.target.value) }}
+            >
+              <option value="-1">GPT Clusters</option>
+              <option value="4">Colors</option>
+              <option value="5">Animals</option>
+              <option value="6">Places</option>
+              <option value="7">Time</option>
+              <option value="8">Emotion</option>
+              <option value="9">Characters</option>
+              <option value="10">Actions</option>
+              <option value="11">Lit Style</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="theme-choice">Reprojection attribute description:</label>
+            <input list="theme-options" id="theme-choice" name="theme-choice" type="search"
+              // onFocus={(e) => {
+              //   e.target.style.borderColor = '#0056b3'; // Darker border on focus
+              //   e.target.style.boxShadow = '0 0 0 0.2rem rgba(0, 123, 255, 0.5)'; // Glow effect on focus
+              // }}
+              // onBlur={(e) => {
+              //   e.target.style.borderColor = '#007bff'; // Revert border color on blur
+              //   e.target.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.5)'; // Revert box shadow on blur
+              // }}
+              value={theme}
+              onChange={e => { setTheme(e.target.value) }}
+            />
+            <datalist id="theme-options">
+              <option value="colors"></option>
+              <option value="animals"></option>
+              <option value="places"></option>
+              <option value="emotions"></option>
+              <option value="time_of_day"></option>
+              <option value="characters"></option>
+              <option value="actions"></option>
+              <option value="literary_styles"></option>
+            </datalist>
+          </div>
+
+          <div className="button-spread" id="transform">
+            <button className="control-button" onClick={handleSend}>Transform</button>
+            <input id="batchsize" name="batchsize" value={batchSize} onChange={e => { setBatchSize(e.target.value) }} type="number" />
+          </div>
+
+          <div>
+            <Progress percent={progress} />
+          </div>
+
+          <IconButton aria-label="send">
+            {(loading) ? <CancelIcon size="1.5rem" variant="determinate" color="inherit" style={{}} onClick={handleCancel} /> : null}
+          </IconButton>
+
+          <div className="button-spread">
+            <button className="control-button" onClick={handleDownload}>Save View</button>
+            <input type="file" id="upload" style={{ display: "none" }} accept=".json" onChange={handleUpload} />
+            <label className="control-button" htmlFor="upload">Load View</label>
+          </div>
+
+          <div style={{ display: 'none' }}>
+            <label id="name"><h4 style={{ paddingLeft: "15px", paddingTop: "0px" }} align="left">Load Projection</h4> </label>
+            <input type="file" accept=".json" onChange={handleFileChange} id="name" name="name" style={{ position: "relative", top: "-15px", left: "-10px" }} align="left" />
+            <br />
+          </div>
+
+        </div>
+        <Legend stringToNumberMap={mapping} colors={colors} />
+      </div>
+
+      {/* Scatterplot */}
+      <div id="scatterplot">
+        <Scatterplot data={plottedData} labels={labelData} colorCol={colorCol} hoveredIndexTable={hoveredRowIndex} width={800} height={600} />
+      </div>
+
+      <div className="container" style={{ width: '20%' }}>
+        <div id="selection">
+          <h3>Selection</h3>
+          <div id="selectioncontent"></div>
+          <table>
+            <tbody id="myTable">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Projected Data
+      <div style={{ position: 'fixed', top: '60%', left:"20%", width: '70%', height: '400px', backgroundColor: 'rgba(255, 255, 255, 0.9)', overflowY: 'auto', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', borderRadius: '10px' }}>
+        <h3 style={{ textAlign: 'center' }}>Projected Data</h3>
+        <table style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th style={{cursor: 'ns-resize'}}onClick={() => requestSort(2)}>Text</th>
+              <th style={{cursor: 'ns-resize'}}onClick={() => requestSort(3)}>{theme}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {generateTableRows(getSortedData())}
+          </tbody>
+        </table>
+      </div> */}
 
     </div>
   );
