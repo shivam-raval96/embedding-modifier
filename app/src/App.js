@@ -410,21 +410,25 @@ function App() {
         <Legend stringToNumberMap={mapping} colors={colors} />
       </div>
 
-      {/* Scatterplot */}
-      <div id="scatterplot">
-        <Scatterplot data={plottedData} labels={labelData} colorCol={colorCol} hoveredIndexTable={hoveredRowIndex} width={800} height={600} />
-      </div>
+      <div className="scatterplot-selection-container">
+        <div id="scatterplot">
+          <Scatterplot data={plottedData} labels={labelData} colorCol={colorCol} hoveredIndexTable={hoveredRowIndex} width={800} height={600} />
+        </div>
 
-      <div className="container" style={{ width: '20%' }}>
-        <div id="selection">
-          <h3>Selection</h3>
-          <div id="selectioncontent"></div>
-          <table>
-            <tbody id="myTable">
-            </tbody>
-          </table>
+        <div className="container" style={{ width: '80%' }}>
+          <div id="selection">
+            <h3>Selection</h3>
+            <div id="selectioncontent"></div>
+            <table>
+              <tbody id="myTable">
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
+
+    
+
 
       {/* Projected Data
       <div style={{ position: 'fixed', top: '60%', left:"20%", width: '70%', height: '400px', backgroundColor: 'rgba(255, 255, 255, 0.9)', overflowY: 'auto', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', borderRadius: '10px' }}>

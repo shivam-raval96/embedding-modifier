@@ -4,7 +4,7 @@
   --main-midg-color: rgb(235, 235, 235);
   --border: 2px solid var(--main-color);
 
-  font-size: 62.5%;
+  font-size: 70%;
 }
 
 .App {
@@ -208,4 +208,19 @@ tr:nth-child(even) {
 
 #selection tr:last-of-type {
   border-bottom: 0;
+}
+.scatterplot-selection-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 20px;
+}
+
+#scatterplot {
+  flex-grow: 1;
+}
+
+.container {
+  width: 20%; /* Adjust this value as needed */
 }
