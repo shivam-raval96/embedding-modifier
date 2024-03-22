@@ -56,7 +56,7 @@ class ClassifierModel(nn.Module):
 
 
 
-from openai import OpenAI
+from openai import OpenAI 
 client = OpenAI(api_key = '')
 
 try:
@@ -115,10 +115,10 @@ def modify_batch():
     df = pd.read_csv('src/datasets/'+dataset+'_emb.csv')
 #If the attribute is not present in a sentence, assign -1.
     prompt_template = """
-    You are tasked with analyzing a list of texts to classify each one according to a specific attribute provided. Your goal is to assign an integer label to each paper based on this attribute. Each unique attribute value found in the texts should correspond to a unique integer, starting from 0. It's important that the attribute values you extract are concise (preferably a phrase or two words).
+    You are tasked with analyzing a list of texts to classify each one according to a specific attribute provided. Your goal is to assign an integer label to each paper based on this attribute. Each unique attribute value found in the texts should correspond to a unique integer, starting from 0. It's important that the attribute values you extract are simple, concise and easily understandable.
 
     For this task, you will also be given a previously established mapping of integers to attribute values if available. If you encounter a new attribute value not present in the existing mapping, you should extend the mapping by assigning a new integer to this value. However, do not alter the original mapping.
-
+ 
     Your output should include both an array of classification labels for the texts and the (potentially updated) mapping of integers to attribute values. Ensure that every text is classified, and the size of the output labels array matches the number of input texts. The output should be formatted as JSON.
 
     Here are the specific details for this task:
@@ -148,6 +148,7 @@ def modify_batch():
         nca = NCA(random_state=42,max_iter=500, n_components=2)
         nca.fit(df.iloc[:len(targets_all), 0:768], targets_all+1)
         embedding = nca.transform(df.iloc[:,0:768])
+        print(embedding.shape)
 
         target_labels = np.concatenate([targets_all, np.full((len(df) - len(targets_all) ), -2)]).flatten()
         
@@ -156,11 +157,11 @@ def modify_batch():
 
     def makeProjections(embedding,target_labels):
         #reducer= UMAP(n_components=2)
-        reducer = TSNE(random_state=42,n_components=2,perplexity=50)
-        embedding = reducer.fit_transform(embedding)
+        #reducer = TSNE(random_state=42,n_components=2,perplexity=100)
+        #embedding = reducer.fit_transform(embedding)
 
         # clustering
-        clusterer = hdbscan.HDBSCAN(min_cluster_size=20, gen_min_span_tree=True)
+        clusterer = hdbscan.HDBSCAN(min_cluster_size=5, gen_min_span_tree=True)
         #clusterer = KMeans(n_clusters=3, random_state=42)
         clusterer.fit(embedding)
         labels = clusterer.labels_
@@ -168,11 +169,11 @@ def modify_batch():
 
         df_mod = pd.DataFrame(embedding)
         df_mod['text'] = df['text']
-        df_mod['GPTlabel']= target_labels
-        df_mod['cluster']= labels
+        df_mod['cluster']= target_labels
+        #df_mod['cluster']= labels
 
         #df_emb = df_emb.join(df_features)
-        #df_mod = df_mod.join(df.iloc[:,768:-1])
+        df_mod = df_mod.join(df.iloc[:,768:-1])
 
         return df_mod
     
@@ -236,7 +237,7 @@ def modify_batch():
                 print(targets)
 
                 
-            except:
+            except: 
                 targets = []
                 
             try:
@@ -247,14 +248,14 @@ def modify_batch():
             print(n*i,n*(i+1),len(targets))
  
 
-            if len(targets)>=n:
+            if len(targets)>=len(texts):
                 targets_all.append(targets[:n])
                 mapping_all.append(mapping)
-                embedding, target_labels = useNN(targets_all) 
+                embedding, target_labels = useNCA(targets_all) 
                 df_mod = makeProjections(embedding,target_labels+2)
                 df_mod['GPTLabelName'] = [mapping[str(i)] if (i >=0) else "Unavailable" for i in target_labels]
                 df_clstr = get_cluster_labels(df_mod, theme)
-
+ 
                 if i >= 3:#int(n_total/n/2):
                     yield f"data: {json.dumps({'update': (i+1)/int(n_total/n), 'embeddings':json.loads(df_mod.to_json(orient='values')), 'labels': json.loads(df_clstr.to_json(orient='values')),'mapping':mapping})}\n\n"
                 else:
@@ -279,7 +280,7 @@ def getGPTresponse(prompt, theme):
             {"role": "system", "content": "You are an expert in comparing and analyzing "+ theme+"."},
             {"role": "user", "content": prompt},
         ],
-        temperature= 0.0
+        temperature= 0.4
     )
     
     try:
@@ -299,7 +300,7 @@ def getScoreJSON(prompt, theme):
             {"role": "system", "content": "You are an expert in comparing and analyzing "+ theme+"."},
             {"role": "user", "content": prompt},
         ],
-        temperature= 0.0
+        temperature= 0.4
     )
     
     try:
@@ -323,7 +324,7 @@ def get_cluster_labels(df, theme):
     for i in range(1,len(clustered_texts)):
     
         cluster_id, text_data = i, clustered_texts.iloc[i]['aggregated_text'][:8000]
-        prompt = f"Given the provided text data:{text_data}, please generate a concise and informative label that captures the essence of the content in relation to a specified theme. The label should consist of a single, short phrase, no longer than two words, that effectively summarizes the main focus of the texts. Focus on nuanced and specific aspects rather than broad or generic terms and topics. Ensure the label directly reflects the central or unique attribute discussed in the texts. The theme is {theme}"
+        prompt = f"Given the provided text data:{text_data}, please generate a concise and informative label that captures the essence of the content in relation to a specified theme. Focus on specific aspects rather  than broad or generic terms and topics, but keep the label simple and understandable and such that multiple texts could be attributed to it. Ensure the label directly reflects the central or unique attribute discussed in the texts. The theme is {theme}"
 
         parameters = {'model': 'gpt-4-0125-preview', 'messages': 
                       [{"role": "system", "content": "You are an expert text label provider that provides labels for the texts provided. The labels should relate on to the attribute:" +theme}, 

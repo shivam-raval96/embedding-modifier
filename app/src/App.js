@@ -252,7 +252,7 @@ function handleCancel() {
           </div>
         ))}
         {/* Manually add the "not detected" and "not analysed" entries */}
-        <div style={{ display: 'flex', alignItems: 'left', marginBottom: '4px' }}>
+        <div style={{ display: 'flex', alignItems: 'left', marginBottom: '4px', display:'none'}}>
           <span style={{
             display: 'inline-block',
             width: '20px',
@@ -336,12 +336,12 @@ function handleCancel() {
         }}
         onMouseLeave={() => setHoveredRowIndex(null)}>
         <td>{index + 1}</td>
-        <td>{entry[2].slice(0,300)}</td>
+        <td>{entry[2].slice(0, 200)}</td>
         <td>
           {/* Make this column editable */}
           <input 
             type="text" 
-            value={entry[5]} 
+            value={entry[4]} 
             onChange={(e) => handleAttributeChange(index, e.target.value)}
             style={{width: '100%'}}
           />
@@ -370,11 +370,12 @@ function handleCancel() {
         <option value="8attrLarge">Synth200</option>
         <option value="poems">Poems</option>
         <option value="relatedworks">Related Works</option>
+        <option value="art">Artworks</option>
 
         <option value="papers">Papers</option>
         <option value="greatgatsby">Great Gatsby</option>
 
-      </select>
+      </select> 
       <br/> <br/> 
       Color by: &nbsp;
          <select 
@@ -473,16 +474,18 @@ function handleCancel() {
    
         </div>
 
-        <div style={{ position: 'fixed', top: '0%', left: "25%",}}>
-            <Scatterplot data={plottedData} labels ={labelData} colorCol ={colorCol} hoveredIndexTable={hoveredRowIndex} width={800} height={600} />
-
+        <div style={{ position: 'fixed', top: '0%', left: "15%",}}>
+        {(dataset=='art')?
+        <ScatterplotImg data={plottedData} labels ={labelData} colorCol ={colorCol} hoveredIndexTable={hoveredRowIndex} width={1400} height={700} />
+        :<Scatterplot data={plottedData} labels ={labelData} colorCol ={colorCol} hoveredIndexTable={hoveredRowIndex} width={1400} height={700} />
+        }
         </div>
 
 
         <div style={{ position: 'fixed', top: '50%', left: 20, width: '300px', height:'500px', backgroundColor: 'rgba(0, 0, 0, 0.02)',
                  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
                 borderRadius: '20px' ,                         // Curved edges
-                fontFamily: 'Arial, sans-serif',
+                fontFamily: 'Arial, sans-serif',display:'none',
                 overflowY: 'scroll'// <Scatterplot data={plottedData} labels ={labelData} colorCol ={colorCol} jitter = {jitter} width={1000} height={800} />
 
                 
@@ -496,7 +499,7 @@ function handleCancel() {
               </table>
             </div>
 
-            <div id = 'legend' style={{ position: 'fixed', top: '6%', left: '82%',
+            <div id = 'legend' style={{ position: 'fixed', top: '6%', left: '88%',
             maxwidth:'300px', 
                 }}>
         
@@ -507,13 +510,12 @@ function handleCancel() {
 
             {/* New div for showing the data table */}
           <div style={{ position: 'fixed', top: '60%', left:"20%", width: '70%', height: '400px', backgroundColor: 'rgba(255, 255, 255, 0.9)', overflowY: 'auto', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', borderRadius: '10px' }}>
-            <h3 style={{ textAlign: 'center' }}>Projected Data</h3>
             <table style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
               <thead>
                 <tr>
                   <th>#</th>
                   <th style={{cursor: 'ns-resize'}}onClick={() => requestSort(2)}>Text</th>
-                  <th style={{cursor: 'ns-resize'}}onClick={() => requestSort(3)}>{theme}</th>
+                  <th style={{cursor: 'ns-resize'}}onClick={() => requestSort(4)}>{theme}</th>
                 </tr>
               </thead>
               <tbody>

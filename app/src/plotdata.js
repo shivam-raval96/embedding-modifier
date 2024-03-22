@@ -335,7 +335,7 @@ function Scatterplot(props) {
 
         // Set tooltip text and position
         tooltipDiv.html(d[2].slice(0, 50)+'...')
-            .style("left", (xScale(d[0])+400) + "px")
+            .style("left", (xScale(d[0])+50) + "px")
             .style("top", (yScale(d[1])-35) + "px")
             .transition()
             .duration(1500)
