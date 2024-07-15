@@ -111,7 +111,7 @@ function trackPointer(e, { start, move, out, end }) {
 
 
 function Scatterplot(props) {
-  var { width, height, data , labels, colorCol, mapping} = props;
+  var { width, height, data , labels, colorCol, searchQuery, attributes} = props;
   const margin = {top:100, left:120, right:80, bottom:100}
   const ref = useRef();
   const [pieCharts, setPieCharts] = useState([])
@@ -120,7 +120,6 @@ function Scatterplot(props) {
   const [tooltipIndices, setTooltipIndices] = useState([]);
 
 
-  const [searchQuery, setSearchQuery] = useState('Enter Query ...');
   const [stringToNumberMap, setStringToNumberMap] = useState({'0':'none'});
 
   function selectIndices(data, gridRows, gridCols) {
@@ -167,35 +166,36 @@ function Scatterplot(props) {
 
 
     function lasso() {
-        const dispatch = d3.dispatch("start", "lasso", "end");
-        const lasso = function(selection) {
-          const node = selection.node();
-          const polygon = [];
-      
-          selection
-            .on("touchmove", e => e.preventDefault()) // prevent scrolling
-            .on("pointerdown", e => {
-              trackPointer(e, {
-                start: p => {
-                  polygon.length = 0;
-                  dispatch.call("start", node, polygon);
-                },
-                move: p => {
-                  polygon.push(p.point);
-                  dispatch.call("lasso", node, polygon);
-                },
-                end: p => {
-                  dispatch.call("end", node, polygon);
-                }
-              });
+      const dispatch = d3.dispatch("start", "lasso", "end");
+      const lasso = function(selection) {
+        const node = selection.node();
+        const polygon = [];
+   
+        selection
+          .on("touchmove", e => e.preventDefault()) // prevent scrolling
+          .on("pointerdown", e => {
+            trackPointer(e, {
+              start: p => {
+                polygon.length = 0;
+                dispatch.call("start", node, polygon);
+              },
+              move: p => {
+                polygon.push(p.point);
+                dispatch.call("lasso", node, polygon);
+              },
+              end: p => {
+                dispatch.call("end", node, polygon);
+              }
             });
-        };
-        lasso.on = function(type, _) {
-          return _ ? (dispatch.on(...arguments), lasso) : dispatch.on(...arguments);
-        };
-      
-        return lasso;
-      }
+          });
+      };
+      lasso.on = function(type, _) {
+        return _ ? (dispatch.on(...arguments), lasso) : dispatch.on(...arguments);
+      };
+   
+      return lasso;
+    }
+
 
     //svg.selectAll('*').remove()
     svg.selectAll('text.label').remove()
@@ -213,79 +213,84 @@ function Scatterplot(props) {
   `);
 
 
-    function draw(polygon) {
-        //d3.select("#selectioncontent").selectAll('*').remove()
+  function draw(polygon, data, attributes) {
+    let table = document.getElementById("myTable");
+    table.innerHTML = ""; // Clear existing table content
+  
+    // Create and append the header row
+    const headerRow = table.insertRow();
+    const headerTitles = ["Text", ...Object.keys(attributes)];
+    headerTitles.forEach(title => {
+      const th = document.createElement("th"); // Create a table header cell
+      th.textContent = title; // Set the text of the header
+      th.classList.add("table-header"); // Apply the CSS class from app.css
+      headerRow.appendChild(th); // Add the header cell to the header row
+    });
+  
 
-        // selectioncontent
-       // const selectioncontent = d3.select("#selectioncontent").append("div")
-        //var content = '<table>'
+    l.datum({
+        type: "LineString",
+        coordinates: polygon
+    }).attr("d", path).style('z-index',-10);
 
-        let table = document.getElementById("myTable");
-        table.innerHTML = "";
+    const selected = [];
 
-        l.datum({
-          type: "LineString",
-          coordinates: polygon
-        }).attr("d", path).style('z-index',-10);
-    
-        const selected = [];
-    
-        // note: d3.polygonContains uses the even-odd rule
-        // which is reflected in the CSS for the lasso shape
-        circles.classed(
-          "selected",
-          polygon.length > 2
-            ? d => {d3.polygonContains(polygon, [xScale(d[0]),yScale(d[1])]) && selected.push(d) }//&& (content += " <tr><td>"+d[2] + "</td></tr>" )}
+    // Select or identify the data points within the polygon
+    circles.classed(
+        "selected",
+        polygon.length > 2
+            ? d => {
+                if (d3.polygonContains(polygon, [xScale(d[0]),yScale(d[1])])) {
+                    selected.push(d);
+                    return true;
+                }
+                return false;
+            }
             : false
-        );
-        //content += '</table>'
+    );
 
-        /*for (const [key, idx] of Object.entries(stringToNumberMap)){
-            console.log(key,"<font color=\"red\">"+key+"</font>")
-            content = content.replaceAll(key,"<font color=\""+colors[idx]+"\">"+key+"</font>")
-        }*/
+    if (selected.length === 0) {
+        // If no selection, show all data
+        selected.push(...data);
+    }
 
-        var TableBackgroundNormalColor = "#ffffff";
-        var TableBackgroundMouseoverColor = "#b8b6b6";
+    var TableBackgroundNormalColor = "#ffffff";
+    var TableBackgroundMouseoverColor = "#b8b6b6";
 
-        // These two functions need no customization.
-        function ChangeBackgroundColor(row,id) { 
-            row.style.backgroundColor =  row.style.backgroundColor.replace(/[^,]+(?=\))/, 0.8);
+    function ChangeBackgroundColor(row, id) {
+        row.style.backgroundColor = row.style.backgroundColor.replace(/[^,]+(?=\))/, 0.8);
+        row.style.border= '1px solid black !important';
+        svg.selectAll('circle').transition(100).attr("r", function(d) {
+            return d.id === id ? r_big : r_small;
+        });
+    }
 
-            row.style.border= '1px solid black !important'
+    function RestoreBackgroundColor(row) {
+        row.style.backgroundColor = row.style.backgroundColor.replace(/[^,]+(?=\))/, 0.4);
+        svg.selectAll('circle').transition(100).attr("r", r_small);
+    }
 
-            svg.selectAll('circle').transition(100).attr("r", function(d) {
-                var dIsInSubset = d.id == id;
-                return dIsInSubset ? r_big : r_small
-              })
-        
-        }
-        function RestoreBackgroundColor(row) { 
-            row.style.backgroundColor =  row.style.backgroundColor.replace(/[^,]+(?=\))/, 0.4);
-            //row.style.backgroundColor = TableBackgroundNormalColor; 
-            svg.selectAll('circle').transition(100).attr("r", r_small)
-        }
+    selected.forEach(d => {
+        let tr = document.createElement("tr");
+        let rowData = `<td>${d[2].slice(0,250)}</td>`; // Original data point name or identifier
 
-        selected.forEach(d=>{
-            let tr = document.createElement("tr");
-            tr.innerHTML =`<td>${d[2]}</td>`;
-            tr.style.backgroundColor = addAlpha(colors[color_idx[d.id]],0.4)
+        // Append attribute values for this data point
+        Object.keys(attributes).forEach(attr => {
+            rowData += `<td>${attributes[attr][d.id]}</td>`; // Assumes `d.id` is a valid index for attribute arrays
+        });
 
-            //tr.addEventListener('mouseover', () => console.log(d));
-            tr.addEventListener('mouseover', () => {console.log(d);ChangeBackgroundColor(tr,d.id)});
-            tr.addEventListener('mouseout', () => {console.log(d);RestoreBackgroundColor(tr)});
+        tr.innerHTML = rowData;
+        tr.style.backgroundColor = addAlpha(colors[color_idx[d.id]],0.4);
 
-            table.appendChild(tr);
+        tr.addEventListener('mouseover', () => {ChangeBackgroundColor(tr, d.id)});
+        tr.addEventListener('mouseout', () => {RestoreBackgroundColor(tr)});
 
-        })
-        svg.value = { polygon, selected };
+        table.appendChild(tr);
+    });
 
-        //selectioncontent.html(content)
-        //selectioncontent.addEventListener('mouseover', () => console.log(datum));
+    svg.value = { polygon, selected };
+}
 
-
-
-      }
     
 
     
@@ -317,39 +322,7 @@ function Scatterplot(props) {
     const randomDataPoints = tooltipIndices.map(index => data[index]);
     console.log(randomDataPoints)
 
-    // Function to create tooltip
-    const createTooltip = (d) => {
-      //console.log(d)
-
-        const tooltipDiv = d3.select("body").append("div")
-            .attr("class", `autotooltip tooltip-${d.id}`)
-            .style("opacity", 0)
-            .style("width", 200)
-            .style("background-color", "white")
-            .style("border", "solid")
-            .style("border-width", "2px")
-            .style("border-radius", "5px")
-            .style("padding", "5px")
-            .style("margin-right", "50px")
-            .style("position", "absolute");
-
-        // Set tooltip text and position
-        tooltipDiv.html(d[2].slice(0, 50)+'...')
-            .style("left", (xScale(d[0])+50) + "px")
-            .style("top", (yScale(d[1])-35) + "px")
-            .transition()
-            .duration(1500)
-            .style("opacity", 1);
-
-            
-    };
-
-    d3.selectAll(".autotooltip").remove();
-    // Create and show tooltips for random points
-    randomDataPoints.forEach(d => createTooltip(d));
-
-
-
+  
 
 
 
@@ -429,7 +402,6 @@ function Scatterplot(props) {
         .attr('stroke-width', 0.5)  // Add this line for the boundary width
         .style("z-index", 2)
         .on("mouseover", (event, d) => {
-          d3.selectAll(".autotooltip").transition().duration(100).style("opacity", 0);
 
             svg.selectAll('circle')
             .transition().duration(100)
@@ -462,7 +434,6 @@ function Scatterplot(props) {
 
           // Show tooltips for random points again
         //d3.selectAll(".tooltip").remove(); // First remove all existing tooltips
-        d3.selectAll(".autotooltip").transition().duration(100).style("opacity", 1);
 
 
 
@@ -528,8 +499,10 @@ function Scatterplot(props) {
       .attr('marker-end', 'url(#arrowhead)');}
 
 
-     svg.call(lasso().on("start lasso end", draw));
-     draw(defaultLasso);
+      svg.call(lasso().on("start lasso end", function(event) {
+        draw(event, data, attributes);
+    }));
+    //draw(defaultLasso);
     
 
 
@@ -555,31 +528,13 @@ function Scatterplot(props) {
 }*/
   
 
-  }, [data, labels,colorCol, width, height, searchQuery,tooltipIndices]);
+  }, [data, labels,colorCol, width, height, searchQuery,tooltipIndices, attributes]);
 
   return (
     <>
-    <div style={{ position: 'fixed', top: '1%', left: '82%', backgroundColor: 'rgba(0, 0, 0, 0.02)',
-                 boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',  // Drop shadow
-                borderRadius: '40px' ,                         // Curved edges
-                fontFamily: 'Arial, sans-serif',
-                overflowY: 'scroll',
-                padding: '10px',
-                fontSize: '22px', // Larger font size for better readability
-                borderRadius: '10px', // Rounded corners
-                color: '#495057', // Text color                
-                }}>
-           <label for="search"><b>Search:</b> </label>
 
-        <input id="search" name="search" style={{ fontSize: '20px',  }}
-      type="text"
-      placeholder="Search..."
-      value={searchQuery}
-      onChange={(e) => {console.log(e.target.value);return setSearchQuery(e.target.value)}}
-
-    /></div>
         <svg ref={ref} width={width} height={height}></svg>
-;
+
     </>
   )
 }

@@ -28,7 +28,7 @@ import os
 import time
 
 from openai import OpenAI
-client = OpenAI(api_key = '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')
+client = OpenAI(api_key = '')
 
 try:
      _create_unverified_https_context = ssl._create_unverified_context

@@ -96,6 +96,41 @@ def initialize_batch():
     # Return session ID to the client
     return jsonify({"message": "Processing initialized", "status": "success", "session_id": session_id})
 
+
+@app.route("/suggest-facets", methods=["POST"])
+def get_facets():
+    content = request.json
+    texts = content.get('texts')
+    prompt_template = """
+    Given a list of texts, which may include research paper titles, descriptions of artworks, or sentences from books, I am seeking to identify underlying relationships between them to enable effective clustering. The goal is to uncover common threads or attributes that these texts may share, facilitating a categorization that highlights their similarities or differences beyond the superficial level. The facets and attributes capture a general relationship and should apply to a variety of texts of similar kinds.
+
+    Please analyze the provided list and suggest possible types of relationships or facets that these texts share. The aim is to enable a nuanced clustering by identifying these commonalities or distinctions, taking into account the different dimensions that may apply to each category of text. Your output should only be a JSON list of the potential relationships and two examples for each facet as such: ['facet1':facet1,
+        "examples": [
+        {
+            "text": text1,
+            "attribute": attribute1
+        },
+        {
+            "text": "text2,
+            "attribute":  attribute2
+        }
+        ], 'facet2':..
+    ]
+
+    Here are the texts: {{sentences}}
+    Please think carefully and ensure the response adheres to these instructions."""
+
+    formatted_sentences = '\n'.join([f"- {sentence}" for sentence in texts])
+    prompt = prompt_template.replace("{{sentences}}", formatted_sentences)
+    print(formatted_sentences)
+    result = getScoreJSON(prompt, 'different facets or relationships in texts') 
+    facets = json.loads(result)
+    print(facets)
+
+
+    # Return session ID to the client
+    return jsonify({"facets": facets})
+
 @app.route("/modify-embeddings/", methods=["GET"])
 def modify_batch():
     # Retrieve session ID from query parameter
@@ -117,7 +152,7 @@ def modify_batch():
     prompt_template = """
     You are tasked with analyzing a list of texts to classify each one according to a specific attribute provided. Your goal is to assign an integer label to each paper based on this attribute. Each unique attribute value found in the texts should correspond to a unique integer, starting from 0. It's important that the attribute values you extract are simple, concise and easily understandable.
 
-    For this task, you will also be given a previously established mapping of integers to attribute values if available. If you encounter a new attribute value not present in the existing mapping, you should extend the mapping by assigning a new integer to this value. However, do not alter the original mapping.
+    For this task, you will also be given a previously established mapping of integers to attribute values if available. If you encounter an entirely new attribute value not present in the existing mapping, you should extend the mapping by assigning a new integer to this value. If attrbute is close enough to any of the existing values, then use that instead of extending the mapping. However, do not alter the original mapping.
  
     Your output should include both an array of classification labels for the texts and the (potentially updated) mapping of integers to attribute values. Ensure that every text is classified, and the size of the output labels array matches the number of input texts. The output should be formatted as JSON.
 
@@ -128,7 +163,7 @@ def modify_batch():
 
     Ensure that each text is accounted for in the output. The output should be JSON in the following format:
 
-    {
+    {  
     'labels': [integer1, integer2, ..., integerN],  # N equals the number of papers
     'mapping': {integer1: 'label1', integer2: 'label2', ...}
     }
@@ -157,8 +192,8 @@ def modify_batch():
 
     def makeProjections(embedding,target_labels):
         #reducer= UMAP(n_components=2)
-        #reducer = TSNE(random_state=42,n_components=2,perplexity=100)
-        #embedding = reducer.fit_transform(embedding)
+        reducer = TSNE(random_state=42,n_components=2,perplexity=50)
+        embedding = reducer.fit_transform(embedding)
 
         # clustering
         clusterer = hdbscan.HDBSCAN(min_cluster_size=5, gen_min_span_tree=True)
@@ -215,6 +250,8 @@ def modify_batch():
         target_labels = np.concatenate([targets_all, np.full((len(df) - len(targets_all) ), -2)]).flatten()
 
         return embedding,target_labels
+    
+
 
     def generate_updates():
         n_total = len(df)
@@ -223,7 +260,7 @@ def modify_batch():
         mapping={}  
         i = 0 
         while i < int(n_total/n):
-            if not should_continue["flag"]:
+            if not should_continue["flag"]: 
                 break  # Stop the loop if the flag is False
             texts = sentences[n*i:n*(i+1)]
             formatted_sentences = '\n'.join([f"- {sentence}" for sentence in texts])
@@ -244,26 +281,28 @@ def modify_batch():
                 print(data['mapping'])
                 mapping.update(data['mapping'])
             except:
-                yolo = 0            
+                yolo = 0             
             print(n*i,n*(i+1),len(targets))
- 
+  
 
             if len(targets)>=len(texts):
                 targets_all.append(targets[:n])
-                mapping_all.append(mapping)
-                embedding, target_labels = useNCA(targets_all) 
+                embedding, target_labels = useNN(targets_all) 
                 df_mod = makeProjections(embedding,target_labels+2)
-                df_mod['GPTLabelName'] = [mapping[str(i)] if (i >=0) else "Unavailable" for i in target_labels]
+                attributes = np.array([mapping[str(i)] if (i >=0) else "Unavailable" for i in target_labels])
+                attributes[target_labels==-1] = "None"
+                df_mod['GPTLabelName'] = attributes
                 df_clstr = get_cluster_labels(df_mod, theme)
+
  
-                if i >= 3:#int(n_total/n/2):
-                    yield f"data: {json.dumps({'update': (i+1)/int(n_total/n), 'embeddings':json.loads(df_mod.to_json(orient='values')), 'labels': json.loads(df_clstr.to_json(orient='values')),'mapping':mapping})}\n\n"
+                if i >= 0:#int(n_total/n/2):
+                    yield f"data: {json.dumps({'update': (i+1)/int(n_total/n), 'embeddings':json.loads(df_mod.to_json(orient='values')), 'labels': json.loads(df_clstr.to_json(orient='values')),'mapping':mapping, 'attributes':json.dumps(attributes.tolist())})}\n\n"
                 else:
                     yield f"data: {json.dumps({'update': (i+1)/int(n_total/n), 'embeddings':'none', 'mapping': mapping})}\n\n"
 
                 i=i+1
         # Indicate completion
-        yield f"data: {json.dumps({'status': 'Completed', 'embeddings':json.loads(df_mod.to_json(orient='values')), 'labels': json.loads(df_clstr.to_json(orient='values')), 'mapping': mapping,'message': 'All batches processed'})}\n\n"
+        yield f"data: {json.dumps({'status': 'Completed', 'embeddings':json.loads(df_mod.to_json(orient='values')), 'labels': json.loads(df_clstr.to_json(orient='values')), 'mapping': mapping, 'attributes':json.dumps(attributes.tolist()),'message': 'All batches processed'})}\n\n"
 
     return Response(stream_with_context(generate_updates()), content_type='text/event-stream')
 
@@ -275,7 +314,7 @@ def stop_processing():
 def getGPTresponse(prompt, theme):
     
     response = client.chat.completions.create(
-        model="gpt-4-0125-preview",
+        model="gpt-3.5-turbo-0125",
         messages=[
             {"role": "system", "content": "You are an expert in comparing and analyzing "+ theme+"."},
             {"role": "user", "content": prompt},
